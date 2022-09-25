@@ -1,0 +1,70 @@
+/* Palette from https://omatsuri.app/color-shades-generator with darken at +36% and saturation at -34%. */
+* {
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  color: #4DABF7;
+  word-spacing: 1px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 30px;
+  text-decoration: underline #28455D;
+}
+
+li {
+  list-style: square;
+  list-style-position: outside;
+  padding-left: 10px;
+  line-height: 25px;
+}
+
+a {
+  color: #FFD43B;
+  text-decoration: underline #5C5024;
+}
+
+a:hover {
+  color: #FFD43B;
+  text-decoration: underline #A78A22;
+}
+
+body {
+  padding: 20px 40px;
+  background: #131116;
+}
+
+::selection {
+  background-color: #3BC9DB;
+  color: #28464A;
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px 20px;
+  }
+  h2, li, section {
+    padding-left: 0;
+  }
+  section:hover {
+    border: none;
+    padding-left: 0;
+  }
+
+  [data-comment]:hover::after {
+    display: none;
+  }
+
+  ul {
+    padding-left: 30px;
+  }
+}

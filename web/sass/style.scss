@@ -1,0 +1,30 @@
+@import 'base';
+
+h1 {
+  img {
+    margin-right: 16px;
+  }
+}
+
+section {
+  padding-left: 20px;
+}
+
+section:hover {
+  padding-left: 18px;
+  border-left: 2px solid #3BC9DB;
+}
+
+[data-comment]:hover::after {
+  content: attr(data-comment);
+  padding-left: 0.5em;
+  opacity: 0.5;
+  color: gray;
+  text-decoration: underline #131116;
+  font-weight: lighter;
+}
+
+.highlight {
+  color: white;
+  font-weight: 500;
+}
