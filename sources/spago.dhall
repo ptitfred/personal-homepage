@@ -11,17 +11,7 @@ When creating a new Spago project, you can use
 to generate this file without the comments in this block.
 -}
 { name = "my-project"
-, dependencies =
-  [ "console"
-  , "effect"
-  , "exceptions"
-  , "maybe"
-  , "prelude"
-  , "react-basic"
-  , "react-basic-dom"
-  , "web-dom"
-  , "web-html"
-  ]
+, dependencies = [ "console", "effect", "prelude" ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
 }

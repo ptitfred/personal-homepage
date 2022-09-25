@@ -8,7 +8,6 @@ let
   spagoPkgs = import ./spago-packages.nix { inherit pkgs; };
 
   dhallDeps = pkgs.dhallPackages.callPackage ./dhall-dependencies.nix {};
-  nodeDeps = (import ./node.nix {}).nodeDependencies;
 
 in
   pkgs.stdenv.mkDerivation {
@@ -17,9 +16,7 @@ in
     buildInputs = [
       spagoPkgs.installSpagoStyle
       spagoPkgs.buildSpagoStyle
-      nodeDeps
     ];
-
     nativeBuildInputs = with pkgs; [
       purescript
       esbuild
@@ -39,9 +36,6 @@ in
       mkdir -p .cache/dhall
       cp -r ${dhallDeps}/.cache/dhall/* .cache/dhall/
       chmod -R u+w .cache/dhall
-
-      rm -rf node_modules
-      ln -s ${nodeDeps}/lib/node_modules ./node_modules
     '';
 
     buildPhase = ''
