@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="house-of-lambda.png">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frédéric Menou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <style type="text/css">
+      * {
+        font-family: 'Lato', sans-serif;
+      }
+
+      body {
+        background-color: white;
+        max-width: 600px;
+        padding: 54pt 90pt 54pt 90pt;
+      }
+
+      ul.tasks {
+        list-style-type: none;
+        padding: 0;
+        margin: 12px 16px 0 0;
+        font-size: 14px;
+      }
+
+      ul.tasks > li:before {
+        content: "\0025cf  ";
+        font-size: 3pt;
+        margin-left: -18pt;
+        white-space: nowrap;
+        display: inline-block;
+        min-width: 18pt;
+      }
+
+      ul.tasks > li {
+        margin-left: 32pt;
+        margin-top: 4px;
+        orphans: 2;
+        widows: 2;
+        text-align: left;
+        margin-right: -1.5pt;
+      }
+
+      ul.tags {
+        list-style-type: none;
+        display: flex;
+        gap: 8px;
+        font-size: 12px;
+        color: #444;
+      }
+
+      .time-window {
+        margin: 0;
+        padding-bottom: 0pt;
+        line-height: 1.3;
+        orphans: 2;
+        widows: 2;
+        text-align: left;
+        color: #666666;
+        font-size: 10pt;
+      }
+
+      .email {
+        orphans: 2;
+        widows: 2;
+        user-select: all;
+      }
+
+      a {
+        text-decoration-skip-ink: none;
+        -webkit-text-decoration-skip: none;
+        color: #1155cc;
+        text-decoration: underline;
+      }
+
+      p {
+        color: black;
+        font-size: 12pt;
+        line-height: 1.3;
+        orphans: 2;
+        widows: 2;
+      }
+
+      h1 {
+        padding: 0;
+        line-height: 1.0;
+        orphans: 2;
+        widows: 2;
+        text-align: left;
+        color: black;
+        font-weight: 700;
+        font-size: 18pt;
+        word-spacing: 4pt;
+      }
+
+      h2 {
+        margin-bottom: 0;
+        padding: 0;
+        color: #3d85c6;
+        font-weight: 700;
+        font-size: 16pt;
+        line-height: 1.0;
+        page-break-after: avoid;
+      }
+
+      h3 {
+        margin: 0;
+        padding: 0;
+        color: black;
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.0;
+        orphans: 2;
+        widows: 2;
+        text-align: left;
+      }
+
+      .position > hgroup > h3 {
+        display: grid;
+        grid-template-areas: "title company";
+        gap: 16px;
+      }
+      .company {
+        grid-area: company;
+        font-weight: lighter;
+      }
+      .position-title {
+        grid-area: title;
+        text-decoration: none;
+        vertical-align: baseline;
+      }
+
+      hgroup {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: baseline;
+      }
+
+      section {
+        margin: 32px 0 0 0;
+      }
+
+      section.position {
+        margin: 24px 0 0 0;
+      }
+
+      @page {
+        margin: 2cm;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+          max-width: unset;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        body {
+          padding: 12px;
+        }
+        hgroup {
+          flex-direction: column;
+        }
+        hgroup > h1 {
+          margin: 0;
+        }
+        p.email {
+          margin: 0;
+        }
+        ul.tasks {
+          margin-left: 4px;
+        }
+        ul.tasks > li {
+          margin-left: 18pt;
+        }
+        .position > hgroup {
+          gap: 8px;
+        }
+        .position > hgroup > h3 {
+          display: grid;
+          gap: 8px;
+          grid-template-areas:
+            "title"
+            "company";
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <hgroup>
+      <h1>Frédéric Menou</h1>
+      <p class="email">contact@frederic.menou.me</p>
+    </hgroup>
+    <section>
+      <h2>What I do</h2>
+      <p>
+        I’m a software engineer with recents experiences in management and
+        hiring for a start-up. I can help build a team from scratch, make
+        architectural decisions, and create a product culture.
+      </p>
+      <p>
+        I can help you structure and expand your tech team, take over a MVP,
+        and build a product team.
+      </p>
+      <p>
+        More on me and what I believe in at
+        <a href="https://frederic.menou.me/">https://frederic.menou.me/</a>.
+      </p>
+    </section>
+    <section>
+      <h2>Positions</h2>
+      <section class="position">
+        <hgroup>
+          <h3>
+            <span class="position-title">Solutions Architect</span>
+            <span class="company">Fretlink</span>
+          </h3>
+          <p class="time-window">June 2021 to July 2022</p>
+        </hgroup>
+        <ul class="tasks">
+          <li>Technical leadership for the whole team (up to 17 developers in 2022).</li>
+          <li>Head of the Devops team.</li>
+          <li>Technical advisor to the CPO for the roadmap.</li>
+        </ul>
+        <ul class="tags">
+          <li>Haskell</li>
+          <li>Purescript</li>
+          <li>NodeJS</li>
+          <li>PostgreSQL</li>
+          <li>React</li>
+          <li>Nix</li>
+          <li>Dhall</li>
+          <li>Ansible</li>
+          <li>Terraform</li>
+        </ul>
+      </section>
+      <section class="position">
+        <hgroup>
+          <h3>
+            <span class="position-title">CTO</span>
+            <span class="company">Fretlink</span>
+          </h3>
+          <p class="time-window">September 2016 &nbsp;to May 2021</p>
+        </hgroup>
+        <ul class="tasks">
+          <li>Management and technical leadership for the whole team (up to 15 developers in 2021), hiring, 1-1s and yearly reviews. Reporting to CODIR.</li>
+          <li>Head of the Devops team.</li>
+          <li>Technical advisor to the CPO for the roadmap.</li>
+          <li>Helped the company raise 6M€ in 2017 and 18M€ in 2020.</li>
+        </ul>
+        <ul class="tags">
+          <li>Haskell</li>
+          <li>Purescript</li>
+          <li>NodeJS</li>
+          <li>PostgreSQL</li>
+          <li>React</li>
+          <li>Nix</li>
+          <li>Dhall</li>
+          <li>Ansible</li>
+          <li>Terraform</li>
+        </ul>
+      </section>
+      <section class="position">
+        <hgroup>
+          <h3>
+            <span class="position-title">CTO</span>
+            <span class="company">Capitaine Train</span>
+          </h3>
+          <p class="time-window">May 2015 to August 2016</p>
+        </hgroup>
+        <ul class="tasks">
+          <li>Management and technical leadership for the whole team (up to 25 developers in 2016), hiring, 1-1s and yearly reviews. Reporting to CODIR.</li>
+          <li>Head of the Devops team.</li>
+          <li>Technical advisor to the CPO for the roadmap.</li>
+          <li>Capitaine Train was acquired by Trainline for an undisclosed amount around 140M€ in 2016.</li>
+        </ul>
+        <ul class="tags">
+          <li>Ruby</li>
+          <li>Rails</li>
+          <li>PostgreSQL</li>
+          <li>EmberJS</li>
+          <li>Ansible</li>
+        </ul>
+      </section>
+      <section class="position">
+        <hgroup>
+          <h3>
+            <span class="position-title">Software Engineer</span>
+            <span class="company">Capitaine Train</span>
+          </h3>
+          <p class="time-window">June 2012 to May 2015</p>
+        </hgroup>
+        <ul class="tasks">
+          <li>Integration of tier APIs (carriers inventories and booking systems).</li>
+          <li>Development and maintenance of booking and after sales backend.</li>
+          <li>Part-time Devops (scripting, CI, deployment procedures and tooling for developers).</li>
+          <li>Hired 10 developers (it was a team effort).</li>
+        </ul>
+        <ul class="tags">
+          <li>Ruby</li>
+          <li>Rails</li>
+          <li>PostgreSQL</li>
+          <li>Ansible</li>
+        </ul>
+      </section>
+      <section class="position">
+        <hgroup>
+          <h3>
+            <span class="position-title">Software Engineer as contractor</span>
+            <span class="company">Sfeir</span>
+          </h3>
+          <p class="time-window">October 2010 to June 2012</p>
+        </hgroup>
+        <ul class="tasks">
+          <li>Java GWT developer at BRED (Banque Populaire).</li>
+          <li>Java Swing developer at KXEN (now a SAP company).</li>
+          <li>Java developer at Embix (a Alstom startup).</li>
+          <li>Java developer at Altergaz (a Eni startup).</li>
+        </ul>
+      </section>
+      <section class="position">
+        <hgroup>
+          <h3>
+            <span class="position-title">Software Engineer as contractor</span>
+            <span class="company">StepInfo</span>
+          </h3>
+          <p class="time-window">September 2007 to September 2010</p>
+        </hgroup>
+        <ul class="tasks">
+          <li>Java developer at SGCIB, working on back-office for exotic derivatives products.</li>
+          <li>Technical support, release management, new features and issue investigation.</li>
+          <li>JavaEE components with a bit of Swing (UI) and JNI (integration of the pricing library written in C++).</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <h2>Education</h2>
+      <section class="position">
+        <hgroup>
+          <h3>
+            <span class="position-title">Ingénieur diplômé & Master 2</span>
+            <span class="company">IMT Mines Alès, France</span>
+          </h3>
+          <p class="time-window">2002 - 2006</p>
+        </hgroup>
+        <p>General engineering, with a specialty in computer science, network, and production.</p>
+        <p>Specialty in computer science, network, and production at Institut EERIE.</p>
+        <p>154th promotion</p>
+      </section>
+    </section>
+    <section>
+      <h2>A bit more about me</h2>
+      <p>
+        I’ve spent quite some time online or at conferences and tech meetups
+        advocating for agile practices and using strongly typed functional
+        programming languages such as Haskell, Purescript or Dhall.
+      </p>
+      <p>
+        You’ll find more details and links to videos on those matters at
+        <a href="https://frederic.menou.me/">https://frederic.menou.me/</a>.
+      </p>
+    </section>
+  </body>
+</html>
