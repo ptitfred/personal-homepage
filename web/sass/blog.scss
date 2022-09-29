@@ -1,0 +1,55 @@
+@import 'base';
+
+article.blog-post {
+  margin: 32px 0 0 128px;
+  max-width: 480px;
+
+  .timestamp {
+    color: darkgray;
+  }
+
+  hr {
+    color: #444;
+  }
+
+  .content {
+    margin-top: 36px;
+
+    img {
+      max-width: 100%;
+      margin-bottom: 12px;
+      filter: grayscale(0.5);
+    }
+
+    p {
+      color: #ccc;
+      margin: 20px 0;
+    }
+  }
+
+  hgroup {
+    h1, p {
+      margin: 0;
+    }
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  article.blog-post {
+    margin: 0;
+
+    hgroup {
+      flex-direction: column;
+    }
+
+    .content {
+      margin-top: 24px;
+    }
+  }
+}
