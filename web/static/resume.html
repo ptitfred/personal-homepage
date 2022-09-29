@@ -47,9 +47,19 @@
       ul.tags {
         list-style-type: none;
         display: flex;
-        gap: 8px;
+        flex-wrap: wrap;
+        gap: 6px;
         font-size: 12px;
         color: #444;
+        padding-left: 18px;
+      }
+
+      ul.tags > li {
+        border-radius: 4px;
+        padding: 1px 6px 2px 6px;
+        background-color: #3d85c629;
+        color: black;
+        user-select: all;
       }
 
       .time-window {
@@ -158,6 +168,14 @@
           padding: 0;
           max-width: unset;
         }
+
+        ul.tags {
+          padding-left: 0;
+        }
+
+        ul.tags > li {
+          background-color: none;
+        }
       }
 
       @media screen and (max-width: 480px) {
@@ -179,6 +197,11 @@
         ul.tasks > li {
           margin-left: 18pt;
         }
+
+        ul.tags {
+          padding-left: 0;
+        }
+
         .position > hgroup {
           gap: 8px;
         }
