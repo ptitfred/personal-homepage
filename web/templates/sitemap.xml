@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>{{ get_url(path="about.html") }}</loc>
-    </url>
-    <url>
-        <loc>{{ get_url(path="resume.html") }}</loc>
-    </url>
     {%- for sitemap_entry in entries %}
     <url>
         <loc>{{ sitemap_entry.permalink | escape_xml | safe }}</loc>
         {%- if sitemap_entry.updated %}
         <lastmod>{{ sitemap_entry.updated }}</lastmod>
         {%- endif %}
+    </url>
+    {%- endfor %}
+    {%- for static_entry in ["about.html", "resume.html"] %}
+    <url>
+        <loc>{{ get_url(path=static_entry) }}</loc>
     </url>
     {%- endfor %}
 </urlset>
