@@ -2,7 +2,7 @@
 * {
   font-size: 16px;
   font-family: 'Lato', sans-serif;
-  color: #4DABF7;
+  color: white;
   word-spacing: 1px;
 }
 
@@ -16,16 +16,20 @@ h1 {
 
 h2 {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 700;
   margin-top: 30px;
   text-decoration: underline #28455D;
 }
 
+ul {
+  padding-left: 32px;
+}
+
 li {
-  list-style: square;
+  list-style-type: "-";
   list-style-position: outside;
-  padding-left: 10px;
-  line-height: 25px;
+  padding-left: 16px;
+  line-height: 24px;
 }
 
 a {
@@ -65,6 +69,11 @@ body {
   }
 
   ul {
-    padding-left: 30px;
+    padding-left: 16px;
+  }
+  li {
+    padding-left: 16px;
+    line-height: unset;
+    margin-bottom: 4px;
   }
 }
