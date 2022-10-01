@@ -13,7 +13,7 @@ in
 
     paths = [
       # The order matters as they are potentially overriding files, so watch out!
-      web
       sources
+      web
     ];
   }
