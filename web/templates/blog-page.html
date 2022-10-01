@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}{{ page.title }} | {{ super() }}{% endblock %}
+
 {% block header %}
   <link href="{{ get_url(path="blog.css") }}" rel="stylesheet">
 {% endblock header %}

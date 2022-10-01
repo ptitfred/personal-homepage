@@ -1,6 +1,8 @@
 # The URL the site will be built for
 base_url = "https://frederic.menou.me"
 
+title = "Frédéric Menou aka p'tit fred"
+
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 
