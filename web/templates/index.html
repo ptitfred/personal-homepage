@@ -1,7 +1,54 @@
 {% extends "base.html" %}
 
+{% block header %}
+  <style>
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 12px;
+    }
+
+    nav > img {
+      align-self: center;
+    }
+
+    nav > h1 {
+      margin-right: 32px;
+    }
+
+    nav > ul.links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 24px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav > ul.links > li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav > div.links > a {
+    }
+
+    @media screen and (max-width: 480px) {
+    }
+
+  </style>
+{% endblock header %}
+
 {% block content %}
-    <h1 data-comment="aka p'tit fred"><img height=32 width=32 src="house-of-lambda.png"> Frédéric Menou</h1>
+    <nav>
+      <img height=32 width=32 src="house-of-lambda.png">
+      <h1>Frédéric Menou</h1>
+      <ul class="links">
+        <li><a href="{{ get_url(path="resume.html") }}">Resume</a></li>
+        <li><a href="{{ get_url(path="about.html") }}">About me</a></li>
+      </ul>
+    </nav>
 
     <section>
       <h2>Short resume</h2>
