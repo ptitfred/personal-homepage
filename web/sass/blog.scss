@@ -53,6 +53,12 @@ article.blog-post {
       margin-right: 8px;
     }
   }
+
+  .yt_embed iframe {
+    width: 100%;
+    min-height: 300px;
+    border: none;
+  }
 }
 
 @media screen and (max-width: 700px) {

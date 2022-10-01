@@ -54,7 +54,7 @@
 
 {% block content %}
     <nav>
-      <img height=32 width=32 src="house-of-lambda.png">
+      <img height=32 width=32 src="{{ get_url(path="house-of-lambda.png") }}">
       <h1>Frédéric Menou</h1>
       <ul class="links">
         <li><a href="{{ get_url(path="resume.html") }}">Resume</a></li>
@@ -121,7 +121,7 @@
       <h2>Videos</h2>
       <ul>
         <li>
-          <a target="_blank" href="https://www.youtube.com/playlist?list=PL8INnc2wyTEk5WKaaP8TEipbPT3N4I5sm">Haskell débutant</a> &mdash; 2018
+          <a href="{{ get_url(path="@/tutorials/2018-01-02_haskell-for-beginners.md")}}">Haskell débutant</a> &mdash; 2018
           <ul class="tags">
             <li>tutorial</li>
             <li>french</li>
@@ -129,7 +129,7 @@
           <div class="description">Playlist introducing to Haskell.</div>
         </li>
         <li>
-          <a target="_blank" href="https://www.youtube.com/playlist?list=PL8INnc2wyTEm1VAIFmEljN4qIf14GB8F4">Haskell avancé</a> &mdash; 2018
+          <a href="{{ get_url(path="@/tutorials/2018-01-27_advanced_haskell.md")}}">Haskell avancé</a> &mdash; 2018
           <ul class="tags">
             <li>tutorial</li>
             <li>french</li>
@@ -137,7 +137,7 @@
           <div class="description">Playlist for more advanced Haskellers.</div>
         </li>
         <li>
-          <a target="_blank" href="https://youtu.be/yKA-hYZa2tQ">Haskell en production en 2017 dans une startup ? Yup.</a> &mdash; 2017
+          <a href="{{ get_url(path="@/tutorials/2017-11-02_haskell-in-production-scalaio.md") }}">Haskell en production en 2017 dans une startup ? Yup.</a> &mdash; 2017
           <ul class="tags">
             <li>conference</li>
             <li>french</li>
