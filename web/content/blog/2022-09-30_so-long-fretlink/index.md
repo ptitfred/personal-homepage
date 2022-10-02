@@ -3,7 +3,7 @@ title = "So long Fretlink!"
 date = 2022-09-30
 +++
 
-![An empty truck viewed from the top, alonside a forklift.](so-long-trucks-banner.jpg)
+{{ banner(alt="An empty truck viewed from the top, alonside a forklift.", src="so-long-trucks-banner.jpg") }}
 
 3 months ago was my last day at [Fretlink](https://www.linkedin.com/company/fretlink/).
 

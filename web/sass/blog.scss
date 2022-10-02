@@ -17,8 +17,13 @@ article.blog-post {
 
     img {
       max-width: 100%;
-      margin-bottom: 12px;
-      filter: grayscale(0.5);
+    }
+
+    figure.banner {
+      margin: 20px 0;
+      img {
+        filter: grayscale(0.5);
+      }
     }
 
     p {
