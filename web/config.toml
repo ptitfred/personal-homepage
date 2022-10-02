@@ -21,9 +21,11 @@ media-types = "media types"
 programming-languages = "programming languages"
 
 conference = "conferences"
-haskell = "haskell"
+haskell = "Haskell"
 "live stream" = "live stream"
 video = "video"
+blog = "blog"
+nix = "Nix"
 
 [markdown]
 # Whether to do syntax highlighting

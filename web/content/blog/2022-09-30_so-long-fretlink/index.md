@@ -1,6 +1,8 @@
 +++
 title = "So long Fretlink!"
 date = 2022-09-30
+[taxonomies]
+media-types = ["blog"]
 +++
 
 {{ banner(alt="An empty truck viewed from the top, alonside a forklift.", src="so-long-trucks-banner.jpg") }}
