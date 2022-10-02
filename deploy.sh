@@ -7,6 +7,7 @@ set -e
 sourceRevision=$(git rev-parse --short HEAD)
 nix-build ./default.nix
 
+result="$(pwd)/result"
 cd target
 
 pendingChanges=$(git status -s | wc -l)
@@ -18,7 +19,7 @@ then
 
 else
   git ls-files -z | xargs -0 rm -f
-  cp --recursive --dereference --no-preserve=all ../result/. ./
+  cp --recursive --dereference --no-preserve=all "${result}"/. ./
   git add --all
   git commit -m "Automated deployment from ${sourceRevision}"
   git push clever master

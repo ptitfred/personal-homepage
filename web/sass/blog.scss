@@ -26,9 +26,13 @@ article.blog-post {
       }
     }
 
-    p {
+    p, ol, ul {
       color: #ccc;
       margin: 20px 0;
+    }
+
+    ol li {
+      list-style-type: decimal;
     }
   }
 
