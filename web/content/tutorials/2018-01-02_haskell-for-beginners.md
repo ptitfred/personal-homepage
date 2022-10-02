@@ -1,6 +1,10 @@
 +++
 title = "Haskell for beginners"
 date = 2018-01-02
+[taxonomies]
+programming-languages = ["haskell"]
+media-types = ["video"]
+contexts = ["live stream"]
 +++
 
 Series of videos introducing Haskell to beginners, in French:

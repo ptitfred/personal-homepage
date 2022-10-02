@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  {{ trans(key=taxonomy.name) | title }}
+</h1>
+<ul>
+  {% for term in terms %}
+  <li><a href="{{ term.permalink | safe }}">{{ trans(key=term.name) }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock content %}

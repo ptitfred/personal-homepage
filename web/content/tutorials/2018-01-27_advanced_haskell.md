@@ -1,6 +1,10 @@
 +++
 title = "Advanced Haskell"
 date = 2018-01-27
+[taxonomies]
+programming-languages = ["haskell"]
+media-types = ["video"]
+contexts = ["live stream"]
 +++
 
 More advanced series of videos about Haskell, in French:

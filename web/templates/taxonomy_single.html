@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  {{ term.name | title }}
+</h1>
+<ul>
+  {% for page in term.pages %}
+  <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
+  {% endfor %}
+</ul>
+{% if term.name == "haskell" %}
+<div style="max-width: 350px">
+<blockquote class="twitter-tweet" data-lang="en" data-dnt="true" data-theme="dark"><p lang="zxx" dir="ltr"><a href="https://t.co/JImS5GfDQD">pic.twitter.com/JImS5GfDQD</a></p>&mdash; Edward Kmett (@kmett) <a href="https://twitter.com/kmett/status/1536358971119919107?ref_src=twsrc%5Etfw">June 13, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+{% endif %}
+{% endblock content %}
