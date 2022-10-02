@@ -13,7 +13,7 @@ article.blog-post {
   }
 
   .content {
-    margin-top: 36px;
+    margin-top: 30px;
 
     img {
       max-width: 100%;
@@ -58,6 +58,12 @@ article.blog-post {
     width: 100%;
     min-height: 300px;
     border: none;
+  }
+
+  .reading-time {
+    font-size: 14px;
+    color: darkgray;
+    margin-top: 6px;
   }
 }
 
