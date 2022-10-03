@@ -174,3 +174,7 @@ Some comments in no specific order:
 # Flakes
 
 I know, I know, this is the future. I'm not used to it (yet).
+
+* * *
+
+Thanks to Céline, Ismaël and Clément for their reviews.
