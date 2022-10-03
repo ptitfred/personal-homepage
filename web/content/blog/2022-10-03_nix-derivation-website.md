@@ -152,7 +152,8 @@ pendingChanges=$(git status -s | wc -l)
 
 if [ "$pendingChanges" -gt 0 ]
 then
-  echo "Some changes weren't committed in the target repository. Aborting"
+  echo "Some changes weren't committed in the target repository."
+  echo "Aborting"
   exit 1
 
 else
