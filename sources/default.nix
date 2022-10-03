@@ -3,9 +3,9 @@
 }:
 
 let
-  gitignoreSource = import ../gitignore.nix { inherit pkgs; };
+  gitignoreSource = pkgs.callPackage ../gitignore.nix {};
 
-  spagoPkgs = import ./spago-packages.nix { inherit pkgs; };
+  spagoPkgs = pkgs.callPackage ./spago-packages.nix {};
 
   dhallDeps = pkgs.dhallPackages.callPackage ./dhall-dependencies.nix {};
 

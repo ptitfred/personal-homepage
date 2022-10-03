@@ -4,7 +4,7 @@
 }:
 
 let
-  gitignoreSource = import ../gitignore.nix { inherit pkgs; };
+  gitignoreSource = pkgs.callPackage ../gitignore.nix { };
 
 in
   pkgs.stdenv.mkDerivation {

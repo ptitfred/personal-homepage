@@ -4,8 +4,8 @@
 }:
 
 let
-  web     = import ./web     { inherit pkgs baseUrl; };
-  sources = import ./sources { inherit pkgs; };
+  web     = pkgs.callPackage ./web     {};
+  sources = pkgs.callPackage ./sources {};
 
 in
   pkgs.symlinkJoin {

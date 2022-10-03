@@ -64,7 +64,7 @@ nix-shell -p python38 --command \
 }:
 
 let
-  gitignoreSource = import ./gitignore.nix { inherit pkgs; };
+  gitignoreSource = pkgs.callPackage ./gitignore.nix {};
 
 in
   pkgs.stdenv.mkDerivation {
@@ -99,18 +99,17 @@ It's a pretty naive derivation:
 The `gitignoreSource` helper is provided the following fixed derivation:
 
 ```nix
-{ pkgs ? import <nixpkgs> {}
-}:
+{ fetchFromGitHub, lib }:
 
 let
-  gitignoreSrc = pkgs.fetchFromGitHub {
+  gitignoreSrc = fetchFromGitHub {
     owner = "hercules-ci";
     repo = "gitignore.nix";
     rev = "a20de23b925fd8264fd7fad6454652e142fd7f73";
     sha256 =
       "sha256-8DFJjXG8zqoONA1vXtgeKXy68KdJL5UaXR8NtVMUbx8=";
   };
-  inherit (import gitignoreSrc { inherit (pkgs) lib; })
+  inherit (import gitignoreSrc { inherit lib; })
     gitignoreSource;
 in gitignoreSource
 ```
