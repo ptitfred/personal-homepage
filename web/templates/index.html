@@ -90,22 +90,24 @@
     <section>
       <h2>Writings</h2>
       <ul>
+      {% set writings = get_section(path="blog/_index.md") %}
+      {% for page in writings.pages %}
         <li>
-          <a href="{{ get_url(path="@/blog/2022-10-03_nix-derivation-website.md")}}">This website is statically generated via Nix</a> &mdash; 2022-10-03
+          <a href="{{ page.path }}">{{ page.title }}</a> &mdash; {{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}
+          {% if page.extra.tags %}
           <ul class="tags">
-            <li>nix</li>
-            <li>english</li>
+            {% for tag in page.extra.tags %}
+            <li>{{ tag }}</li>
+            {% endfor %}
           </ul>
+          {% endif %}
+          {% if page.description %}
+          <div class="description">{{ page.description | markdown(inline=true) | safe }}</div>
+          {% endif %}
         </li>
+      {% endfor %}
         <li>
-          <a href="{{ get_url(path="@/blog/2022-09-30_so-long-fretlink/index.md")}}">So long Fretlink!</a> &mdash; 2022-09-30
-          <ul class="tags">
-            <li>career</li>
-            <li>english</li>
-          </ul>
-        </li>
-        <li>
-          <a target="_blank" href="https://medium.com/@ptitfred/haskell-and-fp-a83b5b22f67f">Haskell et programmation fonctionnelle, ma conviction</a> &mdash; 2018
+          <a target="_blank" href="https://medium.com/@ptitfred/haskell-and-fp-a83b5b22f67f">Haskell et programmation fonctionnelle, ma conviction</a> &mdash; circa 2018
           <ul class="tags">
             <li>haskell</li>
             <li>FP</li>
@@ -114,7 +116,7 @@
           <div class="description">A piece about Functional Programming and Haskell in a business world.</div>
         </li>
         <li>
-          <a target="_blank" href="https://medium.com/@ptitfred/diaspora-cc1addb9182b">Diaspora</a> &mdash; 2016
+          <a target="_blank" href="https://medium.com/@ptitfred/diaspora-cc1addb9182b">Diaspora</a> &mdash; circa 2016
           <ul class="tags">
             <li>career</li>
             <li>english</li>
@@ -124,33 +126,27 @@
       </ul>
     </section>
 
+    {% set videos = get_section(path="tutorials/_index.md") %}
+    {% if videos %}
     <section>
       <h2>Videos</h2>
       <ul>
+      {% for page in videos.pages %}
         <li>
-          <a href="{{ get_url(path="@/tutorials/2018-01-02_haskell-for-beginners.md")}}">Haskell débutant</a> &mdash; 2018
+          <a href="{{ page.path }}">{{ page.title }}</a> &mdash; {{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}
+          {% if page.extra.tags %}
           <ul class="tags">
-            <li>tutorial</li>
-            <li>french</li>
+            {% for tag in page.extra.tags %}
+            <li>{{ tag }}</li>
+            {% endfor %}
           </ul>
-          <div class="description">Playlist introducing to Haskell.</div>
+          {% endif %}
+          {% if page.description %}
+          <div class="description">{{ page.description | markdown(inline=true) | safe }}</div>
+          {% endif %}
         </li>
-        <li>
-          <a href="{{ get_url(path="@/tutorials/2018-01-27_advanced_haskell.md")}}">Haskell avancé</a> &mdash; 2018
-          <ul class="tags">
-            <li>tutorial</li>
-            <li>french</li>
-          </ul>
-          <div class="description">Playlist for more advanced Haskellers.</div>
-        </li>
-        <li>
-          <a href="{{ get_url(path="@/tutorials/2017-11-02_haskell-in-production-scalaio.md") }}">Haskell en production en 2017 dans une startup ? Yup.</a> &mdash; 2017
-          <ul class="tags">
-            <li>conference</li>
-            <li>french</li>
-          </ul>
-          <div class="description">Conference at ScalaIO '17 with <a href="https://twitter.com/clementd">Clément Delafargue</a>.</div>
-        </li>
+      {% endfor %}
       </ul>
     </section>
+    {% endif %}
 {% endblock content %}

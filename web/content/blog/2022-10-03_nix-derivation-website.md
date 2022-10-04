@@ -4,6 +4,8 @@ date = 2022-10-03
 [taxonomies]
 media-types = ["blog"]
 programming-languages = ["nix"]
+[extra]
+tags = ["nix", "english"]
 +++
 
 # Hosted on Clever-Cloud
