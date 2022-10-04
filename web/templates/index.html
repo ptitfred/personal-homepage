@@ -106,26 +106,23 @@
             {% endif %}
           </li>
         {% endfor %}
-        {% if subsection_path == "blog/_index.md" %}
+        {% if subsection.extra.other_pages %}
+        {% for other_page in subsection.extra.other_pages %}
           <li>
-            <a class="title" target="_blank" href="https://medium.com/@ptitfred/haskell-and-fp-a83b5b22f67f">Haskell et programmation fonctionnelle, ma conviction</a>
-            <span class="timestamp">Circa 2018</span>
+            <a class="title" target="_blank" href="{{ other_page.permalink | safe }}">{{ other_page.title }}</a>
+            <span class="timestamp">{{ other_page.date }}</span>
+            {% if other_page.tags %}
             <ul class="tags">
-              <li>haskell</li>
-              <li>FP</li>
-              <li>french</li>
+              {% for tag in other_page.tags %}
+              <li>{{ tag }}</li>
+              {% endfor %}
             </ul>
-            <div class="description">A piece about Functional Programming and Haskell in a business world.</div>
+            {% endif %}
+            {% if other_page.description %}
+            <div class="description">{{ other_page.description | markdown(inline=true) | safe }}</div>
+            {% endif %}
           </li>
-          <li>
-            <a class="title" target="_blank" href="https://medium.com/@ptitfred/diaspora-cc1addb9182b">Diaspora</a>
-            <span class="timestamp">Circa 2016</span>
-            <ul class="tags">
-              <li>career</li>
-              <li>english</li>
-            </ul>
-            <div class="description">A piece about leaving a magical group of people and trying to find something new.</div>
-          </li>
+        {% endfor %}
         {% endif %}
         </ul>
       </section>
