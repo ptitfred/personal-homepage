@@ -31,16 +31,32 @@
       padding: 0;
     }
 
-    div.description {
+    span.timestamp::before {
+      content: "— ";
+    }
+
+    div.description, span.timestamp {
       font-size: 14px;
-      margin-bottom: 4px;
       opacity: 0.8;
+    }
+
+    div.description {
+      margin-bottom: 4px;
     }
 
     div.description > * {
       font-size: 14px;
     }
 
+    @media screen and (max-width: 480px) {
+      ul.tags {
+        display: flex;
+        margin: 4px 0;
+      }
+      ul.tags > li:nth-child(1) {
+        margin-left: 0;
+      }
+    }
     @media screen and (min-width: 780px) {
       body {
         max-width: 780px;
@@ -93,7 +109,8 @@
       {% set writings = get_section(path="blog/_index.md") %}
       {% for page in writings.pages %}
         <li>
-          <a href="{{ page.path }}">{{ page.title }}</a> &mdash; {{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}
+          <a href="{{ page.path }}">{{ page.title }}</a>
+          <span class="timestamp">{{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}</span>
           {% if page.extra.tags %}
           <ul class="tags">
             {% for tag in page.extra.tags %}
@@ -107,7 +124,8 @@
         </li>
       {% endfor %}
         <li>
-          <a target="_blank" href="https://medium.com/@ptitfred/haskell-and-fp-a83b5b22f67f">Haskell et programmation fonctionnelle, ma conviction</a> &mdash; circa 2018
+          <a target="_blank" href="https://medium.com/@ptitfred/haskell-and-fp-a83b5b22f67f">Haskell et programmation fonctionnelle, ma conviction</a>
+          <span class="timestamp">circa 2018</span>
           <ul class="tags">
             <li>haskell</li>
             <li>FP</li>
@@ -116,7 +134,8 @@
           <div class="description">A piece about Functional Programming and Haskell in a business world.</div>
         </li>
         <li>
-          <a target="_blank" href="https://medium.com/@ptitfred/diaspora-cc1addb9182b">Diaspora</a> &mdash; circa 2016
+          <a target="_blank" href="https://medium.com/@ptitfred/diaspora-cc1addb9182b">Diaspora</a>
+          <span class="timestamp">circa 2016</span>
           <ul class="tags">
             <li>career</li>
             <li>english</li>
@@ -133,7 +152,8 @@
       <ul>
       {% for page in videos.pages %}
         <li>
-          <a href="{{ page.path }}">{{ page.title }}</a> &mdash; {{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}
+          <a href="{{ page.path }}">{{ page.title }}</a>
+          <span class="timestamp">{{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}</span>
           {% if page.extra.tags %}
           <ul class="tags">
             {% for tag in page.extra.tags %}
