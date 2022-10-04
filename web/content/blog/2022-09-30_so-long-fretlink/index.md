@@ -1,5 +1,6 @@
 +++
 title = "So long Fretlink!"
+description = "It's been a blast, but it's now time for me to move to something else. I left a wonderful group of people, I miss them already."
 date = 2022-09-30
 [taxonomies]
 media-types = ["blog"]

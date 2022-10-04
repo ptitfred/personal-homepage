@@ -1,5 +1,6 @@
 +++
 title = "This website is statically generated via Nix"
+description = "My recipe to use a Static Site Generator via Nix."
 date = 2022-10-03
 [taxonomies]
 media-types = ["blog"]
