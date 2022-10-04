@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>About me | Frédéric Menou aka p'tit fred</title>
-    <link rel="icon" href="house-of-lambda.png">
+    <title>{{ page.title }} | {{ config.title }}</title>
+    <link rel="icon" href="{{ get_url(path="house-of-lambda.png") }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="about.css" rel="stylesheet">
+    <link href="{{ get_url(path="about.css") }}" rel="stylesheet">
   </head>
 
   <body>
     <div class=main-page>
       <div class=presentation>
         <div class="cartouche">
-          <img class=profile src=profile.jpg height=240 width=240 />
-          <div class=logo><img height=32 width=32 src="house-of-lambda.png" title="House of lambda" /></div>
+          <img class=profile src={{ get_url(path="profile.jpg") }} height=240 width=240 />
+          <div class=logo><img height=32 width=32 src={{ get_url(path="house-of-lambda.png") }} title="House of lambda" /></div>
           <h1 class=name>Frédéric Menou</h1>
         </div>
         <div class=text>
@@ -27,7 +27,6 @@
         </div>
       </div>
     </div>
-    <img src="http://canarytokens.com/images/about/tags/k8fiojgq53q25xh2a9y6nasgu/post.jsp" style="display: none;" />
-    <script type="module" src="index.js"></script>
+    <script type="module" src="{{ get_url(path="index.js") }}"></script>
   </body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" href="house-of-lambda.png">
+    <title>{{ page.title }} | {{ config.title }}</title>
+    <link rel="icon" href="{{ get_url(path="house-of-lambda.png") }}">
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume | Frédéric Menou</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
@@ -389,6 +389,6 @@
         <a href="https://frederic.menou.me/">https://frederic.menou.me/</a>.
       </p>
     </section>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="{{ get_url(path="index.js") }}"></script>
   </body>
 </html>

@@ -77,8 +77,9 @@
       <img height=32 width=32 src="{{ get_url(path="house-of-lambda.png") }}">
       <h1>Frédéric Menou</h1>
       <ul class="links">
-        <li><a href="{{ get_url(path="resume.html") }}">Resume</a></li>
-        <li><a href="{{ get_url(path="about.html") }}">About me</a></li>
+        {% for page in section.pages %}
+        <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
+        {% endfor %}
       </ul>
     </nav>
 
