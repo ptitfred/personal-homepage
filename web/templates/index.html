@@ -85,70 +85,49 @@
 
     {{ section.content | safe }}
 
-    <section>
-      <h2>Writings</h2>
-      <ul>
-      {% set writings = get_section(path="blog/_index.md") %}
-      {% for page in writings.pages %}
-        <li>
-          <a href="{{ page.path }}">{{ page.title }}</a>
-          <span class="timestamp">{{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}</span>
-          {% if page.extra.tags %}
-          <ul class="tags">
-            {% for tag in page.extra.tags %}
-            <li>{{ tag }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-          {% if page.description %}
-          <div class="description">{{ page.description | markdown(inline=true) | safe }}</div>
-          {% endif %}
-        </li>
-      {% endfor %}
-        <li>
-          <a target="_blank" href="https://medium.com/@ptitfred/haskell-and-fp-a83b5b22f67f">Haskell et programmation fonctionnelle, ma conviction</a>
-          <span class="timestamp">circa 2018</span>
-          <ul class="tags">
-            <li>haskell</li>
-            <li>FP</li>
-            <li>french</li>
-          </ul>
-          <div class="description">A piece about Functional Programming and Haskell in a business world.</div>
-        </li>
-        <li>
-          <a target="_blank" href="https://medium.com/@ptitfred/diaspora-cc1addb9182b">Diaspora</a>
-          <span class="timestamp">circa 2016</span>
-          <ul class="tags">
-            <li>career</li>
-            <li>english</li>
-          </ul>
-          <div class="description">A piece about leaving a magical group of people and trying to find something new.</div>
-        </li>
-      </ul>
-    </section>
-
-    {% set videos = get_section(path="tutorials/_index.md") %}
-    {% if videos %}
-    <section>
-      <h2>Videos</h2>
-      <ul>
-      {% for page in videos.pages %}
-        <li>
-          <a href="{{ page.path }}">{{ page.title }}</a>
-          <span class="timestamp">{{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}</span>
-          {% if page.extra.tags %}
-          <ul class="tags">
-            {% for tag in page.extra.tags %}
-            <li>{{ tag }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-          {% if page.description %}
-          <div class="description">{{ page.description | markdown(inline=true) | safe }}</div>
-          {% endif %}
-        </li>
-      {% endfor %}
-      </ul>
-    </section>
-    {% endif %}
+    {% for subsection_path in section.subsections %}
+      {% set subsection = get_section(path=subsection_path) %}
+      <section>
+        <h2>{{ subsection.title }}</h2>
+        <ul>
+        {% for page in subsection.pages %}
+          <li>
+            <a class="title" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+            <span class="timestamp">{{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}</span>
+            {% if page.extra.tags %}
+            <ul class="tags">
+              {% for tag in page.extra.tags %}
+              <li>{{ tag }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {% if page.description %}
+            <div class="description">{{ page.description | markdown(inline=true) | safe }}</div>
+            {% endif %}
+          </li>
+        {% endfor %}
+        {% if subsection_path == "blog/_index.md" %}
+          <li>
+            <a class="title" target="_blank" href="https://medium.com/@ptitfred/haskell-and-fp-a83b5b22f67f">Haskell et programmation fonctionnelle, ma conviction</a>
+            <span class="timestamp">Circa 2018</span>
+            <ul class="tags">
+              <li>haskell</li>
+              <li>FP</li>
+              <li>french</li>
+            </ul>
+            <div class="description">A piece about Functional Programming and Haskell in a business world.</div>
+          </li>
+          <li>
+            <a class="title" target="_blank" href="https://medium.com/@ptitfred/diaspora-cc1addb9182b">Diaspora</a>
+            <span class="timestamp">Circa 2016</span>
+            <ul class="tags">
+              <li>career</li>
+              <li>english</li>
+            </ul>
+            <div class="description">A piece about leaving a magical group of people and trying to find something new.</div>
+          </li>
+        {% endif %}
+        </ul>
+      </section>
+    {% endfor %}
 {% endblock content %}
