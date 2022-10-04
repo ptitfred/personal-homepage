@@ -83,30 +83,7 @@
       </ul>
     </nav>
 
-    <section>
-      <h2>Short resume</h2>
-      <ul>
-        <li>Currently unemployed, <span class=highlight>looking for my next gig</span></li>
-        <li>CTO and Software Architect at <a href="https://www.linkedin.com/company/fretlink/">Fretlink</a> (2016&nbsp;&mdash;&nbsp;2022)</li>
-        <li>Developer and CTO at <a href="https://fr.wikipedia.org/wiki/Trainline_(Europe)">Captain Train</a> (2012&nbsp;&mdash;&nbsp;2016)</li>
-        <li>Developer for various companies as a contractor (2007&nbsp;&mdash;&nbsp;2012)</li>
-        <li data-comment="and I thought my jokes were bad">Joker since the '80s</li>
-      </ul>
-
-      More in the <a href="{{ get_url(path="resume.html")}}">detailed version</a>.
-    </section>
-
-    <section>
-      <h2>Socials</h2>
-      <ul>
-        <li>
-          <a target="_blank" href="https://twitter.com/ptit_fred">Twitter</a>,
-          <a target="_blank" href="https://github.com/ptitfred">Github</a> &amp;
-          <a target="_blank" href="https://www.linkedin.com/in/fmenou">LinkedIn</a>
-        </li>
-        <li data-comment="really want to contact me?"><a href="mailto:contact@frederic.menou.me">contact@frederic.menou.me</a> by email</li>
-      </ul>
-    </section>
+    {{ section.content | safe }}
 
     <section>
       <h2>Writings</h2>
