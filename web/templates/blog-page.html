@@ -4,6 +4,13 @@
 
 {% block header %}
   <link href="{{ get_url(path="blog.css") }}" rel="stylesheet">
+  <meta property="og:title" content="{{ page.title }}" />
+  {% if page.description %}
+  <meta property="og:description" content="{{ page.description | markdown(inline=true) | striptags }}" />
+  {% endif %}
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:site_name" content="Frédéric Menou's blog" />
+  <meta property="og:type" content="article" />
 {% endblock header %}
 
 {% block content %}
