@@ -96,7 +96,7 @@ It's a pretty naive derivation:
   derivation from a working directory and make sure we don't rebuild every single
   time if a non relevant file is modified.
 
-The `gitignoreSource` helper is provided the following fixed derivation:
+The `gitignoreSource` helper is provided by the following fixed derivation:
 
 ```nix
 { fetchFromGitHub, lib }:
@@ -178,4 +178,4 @@ I know, I know, this is the future. I'm not used to it (yet).
 
 * * *
 
-Thanks to Céline, Ismaël and Clément for their reviews.
+Thanks to Céline, Ismaël, Clément and Björn for their reviews.
