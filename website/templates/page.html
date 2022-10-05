@@ -42,6 +42,11 @@
       <h1 class="title">{{ page.title }}</h1>
       <p class="timestamp">{{ page.date }}</p>
     </hgroup>
+    {% if page.description %}
+    <div class="description">
+      {{ page.description | markdown(inline=true) | safe }}
+    </div>
+    {% endif %}
     {% if page.reading_time > 1 %}
     <div class="reading-time">
       {{ page.reading_time }} minutes
