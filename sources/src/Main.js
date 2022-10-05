@@ -3,6 +3,7 @@ export const setupMatomo = subdomain => siteId => () => {
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
+  _paq.push(['MediaAnalytics::scanForMedia']);
   (function() {
     var url = "https://" + subdomain + ".matomo.cloud/matomo.php";
     _paq.push(['setTrackerUrl', url]);
