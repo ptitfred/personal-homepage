@@ -9,7 +9,7 @@ programming-languages = ["nix"]
 tags = ["nix", "english"]
 +++
 
-# Hosted on Clever-Cloud
+## Hosted on Clever-Cloud
 
 This blog is (currently) hosted on [Clever-Cloud](https://www.clever-cloud.com), a PaaS.
 
@@ -31,7 +31,7 @@ By the way you should learn about biscuits, but that's a story for another time.
 
 Also I love [Nix](https://nixos.org/).
 
-# Zola
+## Zola
 
 [Zola](https://www.getzola.org) is a static site generator. I won't plagiarize
 their own documentation so if you want to know more, go read it. I'll wait.
@@ -58,7 +58,7 @@ nix-shell -p python38 --command \
   "python3 -m http.server --directory public/"
 ```
 
-# The derivation wrapping it
+## The derivation wrapping it
 
 ```nix
 { pkgs ? import <nixpkgs> {}
@@ -121,7 +121,7 @@ This produces a `result/` directory containing the result of `zola build`. Relau
 
 The last step is to deploy it on your hosting provider.
 
-# Deploying to Clever-Cloud
+## Deploying to Clever-Cloud
 
 As I mentioned in the beginning, I use Clever-Cloud. It's probably not the cheaper option for this usecase, but in exchange of a fee I don't worry about system maintenance, uptime, and other boring stuff in that vein.
 
@@ -175,7 +175,7 @@ Some comments in no specific order:
 - The script is pleasing shellcheck. The only pragma used here (line 2) is required because of the nix-shell shebang. The rest is clean.
 - If no change detected, `git commit` will fail, so no useless deployment.
 
-# Flakes
+## Flakes
 
 I know, I know, this is the future. I'm not used to it (yet).
 
