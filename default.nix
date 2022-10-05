@@ -4,8 +4,8 @@
 }:
 
 let
-  web     = pkgs.callPackage ./web     {};
-  sources = pkgs.callPackage ./sources {};
+  website   = pkgs.callPackage ./website   {};
+  scripting = pkgs.callPackage ./scripting {};
 
 in
   pkgs.symlinkJoin {
@@ -13,7 +13,7 @@ in
 
     paths = [
       # The order matters as they are potentially overriding files, so watch out!
-      sources
-      web
+      scripting
+      website
     ];
   }
