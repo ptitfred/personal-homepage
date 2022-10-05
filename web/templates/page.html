@@ -31,7 +31,12 @@
             C400.004,190.438,392.251,182.686,382.688,182.686z"/>
         </g>
       </svg>
-      <a href="{{ get_url(path="/") }}">Back to home</a>
+      <ul>
+        {% for ancestor_path in page.ancestors %}
+        {% set ancestor = get_section(path=ancestor_path) %}
+        <li><a href="{{ ancestor.permalink }}">{{ ancestor.title }}</a></li>
+        {% endfor %}
+      </ul>
     </nav>
     <hgroup>
       <h1 class="title">{{ page.title }}</h1>

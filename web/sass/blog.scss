@@ -54,7 +54,7 @@ article.blog-post {
 
   nav {
     position: relative;
-    left: -28px;
+    left: -40px;
     margin-bottom: 32px;
 
     svg.icon {
@@ -63,7 +63,29 @@ article.blog-post {
       fill: white;
       position: relative;
       top: 3px;
-      margin-right: 8px;
+      margin-right: 24px;
+    }
+
+    ul {
+      display: inline-flex;
+      margin: 0;
+      padding: 0;
+      gap: 12px;
+
+      li {
+        list-style-type: none;
+        padding: 0;
+
+        &:nth-child(1)::before {
+          content: "";
+          margin-right: 0;
+        }
+
+        &::before {
+          content: ">";
+          margin-right: 12px;
+        }
+      }
     }
   }
 
@@ -91,6 +113,10 @@ article.blog-post {
     nav {
       position: static;
       margin-bottom: 16px;
+
+      svg.icon {
+        margin-right: 16px;
+      }
     }
 
     .content {
