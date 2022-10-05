@@ -1,7 +1,10 @@
 RewriteEngine On
-RewriteRule about.html /about/ [R]
+RewriteRule about.html  /about/  [R]
 RewriteRule resume.html /resume/ [R]
 
-RedirectMatch "^/writings/(.*)$" "/blog/$1"
+RedirectMatch "^/blog$"           "/writings/"
+RedirectMatch "^/blog/(.*)$"      "/writings/$1"
+RedirectMatch "^/tutorials$"      "/tutorials-and-conferences/"
+RedirectMatch "^/tutorials/(.*)$" "/tutorials-and-conferences/$1"
 
 ErrorDocument 404 /404.html
