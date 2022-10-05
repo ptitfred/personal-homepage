@@ -7,7 +7,7 @@
 {% endif %}
 
 {% block header %}
-  <link href="{{ get_url(path="blog.css") }}" rel="stylesheet">
+  <link href="{{ get_url(path="blog.css", cachebust=true) }}" rel="stylesheet">
   <meta property="og:title" content="{{ page.title }}" />
   {% if page.description %}
   <meta property="og:description" content="{{ page.description | markdown(inline=true) | striptags }}" />

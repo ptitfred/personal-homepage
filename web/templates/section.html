@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block header %}
-  <link href="{{ get_url(path="section.css") }}" rel="stylesheet">
+  <link href="{{ get_url(path="section.css", cachebust=true) }}" rel="stylesheet">
 {% endblock header %}
 
 {% block content %}

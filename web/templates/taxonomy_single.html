@@ -2,7 +2,7 @@
 
 {% block header %}
 {% if term.name == "haskell" %}
-<link href="{{ get_url(path="taxonomy/haskell.css") }}" rel="stylesheet">
+<link href="{{ get_url(path="taxonomy/haskell.css", cachebust=true) }}" rel="stylesheet">
 {% endif %}
 {% endblock header %}
 
