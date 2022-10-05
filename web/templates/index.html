@@ -5,44 +5,7 @@
   <meta property="og:locale" content="en_GB" >
   <meta property="og:site_name" content="Frédéric Menou's website" >
   <meta property="og:type" content="website" >
-  <style>
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 0 12px;
-    }
-
-    nav > img {
-      align-self: center;
-    }
-
-    nav > h1 {
-      margin-right: 32px;
-    }
-
-    nav > ul.links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0 24px;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav > ul.links > li {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    @media screen and (min-width: 780px) {
-      body {
-        max-width: 780px;
-        margin-left: 100px;
-        margin-top: 30px;
-      }
-    }
-  </style>
+  <link href="{{ get_url(path="home.css", cachebust=true) }}" rel="stylesheet">
 {% endblock header %}
 
 {% block content %}

@@ -1,0 +1,36 @@
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 12px;
+
+  > img {
+    align-self: center;
+  }
+
+  > h1 {
+    margin-right: 32px;
+  }
+
+  > ul.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    margin: 0;
+    padding: 0;
+
+    > li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 780px) {
+  body {
+    max-width: 780px;
+    margin-left: 100px;
+    margin-top: 30px;
+  }
+}

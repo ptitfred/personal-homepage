@@ -1,78 +1,16 @@
 {% extends "base.html" %}
 
+{% block header %}
+  <link href="{{ get_url(path="404.css", cachebust=true) }}" rel="stylesheet">
+{% endblock header %}
+
 {% block content %}
-<style>
-  .c404 {
-    display: grid;
-    gap: 0px 32px;
-
-    font-size: 20px;
-  }
-
-  .c404 * {
-    font-size: 20px;
-  }
-
-  .http-code {
-    grid-area: http-code;
-    font-size: 24px;
-    font-weight: 700;
-    justify-self: center;
-  }
-
-  .broken-logo {
-    grid-area: broken-logo;
-    align-self: center;
-    filter: sepia();
-  }
-
-  .excuse-message {
-    grid-area: excuse-message;
-    align-self: center;
-  }
-  .http-code, .excuse-message p {
-    color: darkgray;
-  }
-
-  @media screen and (min-width: 700px) {
-    .c404 {
-      grid-template-areas:
-        "broken-logo excuse-message"
-        "http-code   excuse-message";
-      grid-template-columns: min-content 1fr;
-      grid-template-rows: min-content min-content;
-      max-width: 600px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-    }
-  }
-  @media screen and (max-width: 700px) {
-    .c404 {
-      grid-template-areas:
-        "broken-logo http-code"
-        "excuse-message excuse-message";
-      grid-template-columns: min-content 1fr;
-      grid-template-rows: min-content min-content;
-    }
-
-    .http-code {
-      grid-area: http-code;
-      font-size: 24px;
-      font-weight: 700;
-      justify-self: start;
-      align-self: center;
-    }
-
-  }
-</style>
-<div class="c404">
-  <img class="broken-logo" src="{{ get_url(path="house-of-broken.png") }}">
-  <div class="excuse-message">
-    <p>I'm sorry. It's not you it's me...</p>
-    <p>You can browse actual content <a href="{{ get_url(path="/") }}">here</a>.</p>
+  <div class="c404">
+    <img class="broken-logo" src="{{ get_url(path="house-of-broken.png") }}">
+    <div class="excuse-message">
+      <p>I'm sorry. It's not you it's me...</p>
+      <p>You can browse actual content <a href="{{ get_url(path="/") }}">here</a>.</p>
+    </div>
+    <span class="http-code">404</span>
   </div>
-  <span class="http-code">404</span>
-</div>
 {% endblock content %}
