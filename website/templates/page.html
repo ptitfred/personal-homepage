@@ -3,7 +3,7 @@
 {% block title %}{{ page.title }} | {{ super() }}{% endblock %}
 
 {% if page.description %}
-{% block description %}{{ page.description }}{% endblock %}
+{% block description %}{{ page.description | markdown(inline=true) | striptags }}{% endblock %}
 {% endif %}
 
 {% block header %}
