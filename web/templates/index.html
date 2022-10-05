@@ -35,32 +35,6 @@
       padding: 0;
     }
 
-    span.timestamp::before {
-      content: "— ";
-    }
-
-    div.description, span.timestamp {
-      font-size: 14px;
-      opacity: 0.8;
-    }
-
-    div.description {
-      margin-bottom: 4px;
-    }
-
-    div.description > * {
-      font-size: 14px;
-    }
-
-    @media screen and (max-width: 480px) {
-      ul.tags {
-        display: flex;
-        margin: 4px 0;
-      }
-      ul.tags > li:nth-child(1) {
-        margin-left: 0;
-      }
-    }
     @media screen and (min-width: 780px) {
       body {
         max-width: 780px;
@@ -68,7 +42,6 @@
         margin-top: 30px;
       }
     }
-
   </style>
 {% endblock header %}
 
@@ -92,35 +65,39 @@
         <ul>
         {% for page in subsection.pages %}
           <li>
-            <a class="title" href="{{ page.permalink | safe }}">{{ page.title }}</a>
-            <span class="timestamp">{{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}</span>
-            {% if page.extra.tags %}
-            <ul class="tags">
-              {% for tag in page.extra.tags %}
-              <li>{{ tag }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-            {% if page.description %}
-            <div class="description">{{ page.description | markdown(inline=true) | safe }}</div>
-            {% endif %}
+            <div class="article-link">
+              <a class="title" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+              <span class="timestamp">{{ page.date | date(format="%B %e, %Y", timezone="Europe/Berlin") }}</span>
+              {% if page.extra.tags %}
+              <ul class="tags">
+                {% for tag in page.extra.tags %}
+                <li>{{ tag }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% if page.description %}
+              <div class="description">{{ page.description | markdown(inline=true) | safe }}</div>
+              {% endif %}
+            </div>
           </li>
         {% endfor %}
         {% if subsection.extra.other_pages %}
         {% for other_page in subsection.extra.other_pages %}
           <li>
-            <a class="title" target="_blank" href="{{ other_page.permalink | safe }}">{{ other_page.title }}</a>
-            <span class="timestamp">{{ other_page.date }}</span>
-            {% if other_page.tags %}
-            <ul class="tags">
-              {% for tag in other_page.tags %}
-              <li>{{ tag }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-            {% if other_page.description %}
-            <div class="description">{{ other_page.description | markdown(inline=true) | safe }}</div>
-            {% endif %}
+            <div class="article-link">
+              <a class="title" target="_blank" href="{{ other_page.permalink | safe }}">{{ other_page.title }}</a>
+              <span class="timestamp">{{ other_page.date }}</span>
+              {% if other_page.tags %}
+              <ul class="tags">
+                {% for tag in other_page.tags %}
+                <li>{{ tag }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% if other_page.description %}
+              <div class="description">{{ other_page.description | markdown(inline=true) | safe }}</div>
+              {% endif %}
+            </div>
           </li>
         {% endfor %}
         {% endif %}
