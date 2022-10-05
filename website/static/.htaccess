@@ -1,3 +1,5 @@
+Header add Access-Control-Allow-Origin: "https://menou.me"
+
 RewriteEngine On
 RewriteRule about.html  /about/  [R]
 RewriteRule resume.html /resume/ [R]
