@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <link href="{{ get_url(path="resume.css", cachebust=true) }}" rel="stylesheet">
+    {% set content_hash = get_file_hash(path=page.relative_path, sha_type=256) | base64_encode %}
+    <meta property="source_hash" content="{{ content_hash }}" >
+    <meta property="og:image"  content="/og/{{ content_hash }}.png">
+    <meta name="twitter:image" content="/og/{{ content_hash }}.png">
   </head>
   <body>
     <hgroup>

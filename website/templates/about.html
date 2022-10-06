@@ -9,6 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ get_url(path="about.css", cachebust=true) }}" rel="stylesheet">
+    {% set content_hash = get_file_hash(path=page.relative_path, sha_type=256) | base64_encode %}
+    <meta property="source_hash" content="{{ content_hash }}" >
+    <meta property="og:image"  content="/og/{{ content_hash }}.png">
+    <meta name="twitter:image" content="/og/{{ content_hash }}.png">
   </head>
 
   <body>
