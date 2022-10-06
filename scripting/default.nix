@@ -1,5 +1,4 @@
 { pkgs ? import <nixpkgs> {}
-, name ? "frontend"
 }:
 
 let
@@ -11,7 +10,7 @@ let
 
 in
   pkgs.stdenv.mkDerivation {
-    inherit name;
+    name = "personal-homepage-scripting";
 
     buildInputs = [
       spagoPkgs.installSpagoStyle
