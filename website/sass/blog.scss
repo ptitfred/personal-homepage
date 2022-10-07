@@ -4,6 +4,19 @@ article.blog-post {
   margin: 24px 0 0 128px;
   max-width: 540px;
 
+  h2 {
+    a.zola-anchor {
+      position: relative;
+      left: -32px;
+      margin-right: -19px;
+      text-decoration: none;
+      opacity: 0.5;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
   .timestamp, .description {
     color: darkgray;
     font-size: 12px;
