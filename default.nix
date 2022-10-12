@@ -3,8 +3,9 @@
 }:
 
 let
-  website   = pkgs.callPackage ./website/package.nix { inherit baseUrl; };
-  scripting = pkgs.callPackage ./scripting {};
+  website      = pkgs.callPackage ./website/package.nix { inherit baseUrl; };
+  scripting    = pkgs.callPackage ./scripting {};
+  apache-httpd = pkgs.callPackage ./apache-httpd/package.nix {};
 
 in
   pkgs.symlinkJoin {
@@ -12,6 +13,7 @@ in
 
     paths = [
       # The order matters as they are potentially overriding files, so watch out!
+      apache-httpd
       scripting
       website
     ];
