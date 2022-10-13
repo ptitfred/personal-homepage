@@ -6,7 +6,7 @@
 
 with import <nixpkgs/nixos/lib/testing-python.nix> { inherit system pkgs; };
 
-let website = pkgs.callPackage ./nginx.nix { baseUrl = "http://localhost"; };
+let website = pkgs.callPackage ./package.nix { baseUrl = "http://localhost"; };
 in
   makeTest {
     nodes.machine = { ... }: {
@@ -17,7 +17,7 @@ in
       services.nginx.enable = true;
       services.nginx.virtualHosts.local = {
         locations."/" = {
-          inherit (website) root extraConfig;
+          inherit (website.nginx) root extraConfig;
         };
       };
 
