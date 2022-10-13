@@ -1,5 +1,7 @@
 { system ? builtins.currentSystem
 , pkgs ? import <nixpkgs> { inherit system; }
+, cores ? 1
+, memorySize ? 256
 }:
 
 with import <nixpkgs/nixos/lib/testing-python.nix> { inherit system pkgs; };
@@ -9,8 +11,9 @@ in
 {
   nginx = makeTest {
     nodes.machine = { ... }: {
-      virtualisation.cores = 1;
-      virtualisation.memorySize = 256;
+      virtualisation = {
+        inherit cores memorySize;
+      };
 
       services.nginx.enable = true;
       services.nginx.virtualHosts.local = {
@@ -25,7 +28,16 @@ in
     testScript = ''
       machine.start();
       machine.wait_for_unit("nginx.service");
-      machine.succeed("http http://localhost/sitemap.xml");
+
+      with subtest("Base files present"):
+        machine.succeed("http http://localhost/index.html");
+        machine.succeed("http http://localhost/sitemap.xml");
+
+      with subtest("Legacy URLs still there (by redirections)"):
+        machine.succeed("http http://localhost/about.html");
+        machine.succeed("http http://localhost/resume.html");
+        machine.succeed("http http://localhost/blog");
+        machine.succeed("http http://localhost/tutorials");
     '';
   };
 }
