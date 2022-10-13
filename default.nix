@@ -4,7 +4,7 @@
 
 let
   website      = pkgs.callPackage ./website/package.nix { inherit baseUrl; };
-  scripting    = pkgs.callPackage ./scripting {};
+  scripting    = pkgs.callPackage ./scripting/package.nix    {};
   apache-httpd = pkgs.callPackage ./apache-httpd/package.nix {};
 
 in
