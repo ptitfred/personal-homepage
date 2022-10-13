@@ -9,7 +9,7 @@ sourceRevision=$(git rev-parse --short HEAD)
 ./take-screenshots.sh
 screenshots="$(pwd)/screenshots"
 
-nix-build ./default.nix
+nix-build -A clever-cloud
 result="$(pwd)/result"
 
 cd target

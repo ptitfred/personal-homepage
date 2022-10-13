@@ -2,4 +2,5 @@
 , baseUrl ? "https://frederic.menou.me"
 }:
 
-pkgs.callPackage ./package.nix { inherit baseUrl; }
+let gitignoreSource = pkgs.callPackage ../gitignore.nix { };
+in pkgs.callPackage ./package.nix { inherit baseUrl gitignoreSource; }

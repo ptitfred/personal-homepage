@@ -2,10 +2,10 @@
 , callPackage
 , zola
 , baseUrl
+, gitignoreSource
 }:
 
 let
-  gitignoreSource = callPackage ../gitignore.nix { };
 
 in
   stdenv.mkDerivation {
