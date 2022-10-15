@@ -6,7 +6,7 @@ let
   gitignoreSource = pkgs.callPackage ./gitignore.nix { };
 
   website   = pkgs.callPackage website/package.nix { inherit baseUrl gitignoreSource; };
-  scripting = pkgs.callPackage scripting/package.nix {};
+  scripting = pkgs.callPackage scripting/package.nix { minify = true; };
   content =
     pkgs.symlinkJoin {
       name = "personal-homepage";

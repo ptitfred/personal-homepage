@@ -1,4 +1,5 @@
 { pkgs
+, minify
 }:
 
 let
@@ -7,6 +8,11 @@ let
   spagoPkgs = pkgs.callPackage ./spago-packages.nix {};
 
   dhallDeps = pkgs.dhallPackages.callPackage ./dhall-dependencies.nix {};
+
+  bundlingOptions =
+    if minify
+    then "--minify --source-maps"
+    else ""
 
 in
   pkgs.stdenv.mkDerivation {
@@ -40,7 +46,7 @@ in
     buildPhase = ''
       export XDG_CACHE_HOME=.cache
       build-spago-style "./src/**/*.purs"
-      spago --global-cache=skip bundle-app --minify --no-build --no-install --source-maps --to index.js
+      spago --global-cache=skip bundle-app ${bundlingOptions} --no-build --no-install --to index.js
     '';
 
     installPhase = ''
