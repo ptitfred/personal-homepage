@@ -1,28 +1,24 @@
 { stdenv
-, callPackage
 , zola
 , baseUrl
 , gitignoreSource
 }:
 
-let
+stdenv.mkDerivation {
+  name = "personal-homepage-website";
 
-in
-  stdenv.mkDerivation {
-    name = "personal-homepage-website";
+  nativeBuildInputs = [
+    zola
+  ];
 
-    nativeBuildInputs = [
-      zola
-    ];
+  src = gitignoreSource ./.;
 
-    src = gitignoreSource ./.;
+  buildPhase = ''
+    zola build -u ${baseUrl}
+  '';
 
-    buildPhase = ''
-      zola build -u ${baseUrl}
-    '';
-
-    installPhase = ''
-      mkdir $out
-      cp -r public/. $out/
-    '';
-  }
+  installPhase = ''
+    mkdir $out
+    cp -r public/. $out/
+  '';
+}
