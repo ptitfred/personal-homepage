@@ -1,11 +1,10 @@
 { pkgs
+, curl
 , htmlq
 , imagemagick
-, lib
-, makeWrapper
 , puppeteer-cli
-, stdenv
 }:
 
 let wrapper = pkgs.callPackage ./wrapper.nix {};
- in wrapper "take-screenshots.sh" [ imagemagick puppeteer-cli htmlq ]
+    take-screenshots = wrapper "take-screenshots.sh" [ curl htmlq imagemagick puppeteer-cli ];
+in { inherit take-screenshots; }
