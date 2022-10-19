@@ -21,5 +21,5 @@ in
     nginx = pkgs.callPackage webservers/nginx/package.nix {
       root = content;
     };
-    tools = pkgs.callPackage scripting/package.nix {};
+    tools = pkgs.callPackage scripts/package.nix {};
   }
