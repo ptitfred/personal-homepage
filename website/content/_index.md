@@ -18,6 +18,6 @@ More in the [detailed version](@/resume.md).
 {% section() %}
 ## Socials
 
-- [Twitter](https://twitter.com/ptit_fred), [Github](https://github.com/ptitfred) & [LinkedIn](https://www.linkedin.com/in/fmenou)
+- <a href="https://pouet.chapril.org/@ptitfred" rel="noopener me" target="_blank">Mastodon</a>, <a href="https://twitter.com/ptit_fred" rel="noopener me" target="_blank">Twitter</a>, [Github](https://github.com/ptitfred) & [LinkedIn](https://www.linkedin.com/in/fmenou)
 - <span data-comment="really want to contact me?">[contact@frederic.menou.me](mailto:contact@frederic.menou.me) by email</span>
 {% end %}
