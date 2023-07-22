@@ -12,13 +12,13 @@
     <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
     <meta property="twitter:url" content="{{ config.base_url | safe }}">
     {% if page %}
-    {% set content_hash = get_file_hash(path=page.relative_path, sha_type=256) | base64_encode %}
+    {% set content_hash = get_hash(path=page.relative_path, sha_type=256) | base64_encode %}
     <meta property="source_hash" content="{{ content_hash }}" >
     <meta property="og:image"  content="/og/{{ content_hash }}.png">
     <meta name="twitter:image" content="/og/{{ content_hash }}.png">
     {% endif %}
     {% if section %}
-    {% set content_hash = get_file_hash(path=section.relative_path, sha_type=256) | base64_encode %}
+    {% set content_hash = get_hash(path=section.relative_path, sha_type=256) | base64_encode %}
     <meta property="source_hash" content="{{ content_hash }}" >
     <meta property="og:image"  content="/og/{{ content_hash }}.png">
     <meta name="twitter:image" content="/og/{{ content_hash }}.png">

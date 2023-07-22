@@ -9,6 +9,7 @@ with import <nixpkgs/nixos/lib/testing-python.nix> { inherit system pkgs; };
 let website = pkgs.callPackage ./package.nix { baseUrl = "http://localhost"; };
 in
   makeTest {
+    name = "personal-homepage-hosting";
     nodes.machine = { ... }: {
       virtualisation = {
         inherit cores memorySize;
