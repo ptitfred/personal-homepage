@@ -22,8 +22,7 @@ jobs:
     - uses: cachix/install-nix-action@v22
       with:
         nix_path: nixpkgs=channel:nixos-23.05:nixpkgs-overlays=./overlays
-    - run: nix-build scripting
-    - run: nix-build scripts
-    - run: nix-build --argstr baseUrl http://localhost:8000 website
-    - run: nix-build --argstr baseUrl http://localhost:8000
+    - run: nix build .#scripting
+    - run: nix build .#tools.take-screenshots
+    - run: nix build .#nginx.root
     - run: ./take-screenshots.sh

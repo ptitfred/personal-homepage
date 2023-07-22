@@ -1,7 +1,8 @@
-let fetchPackage = self: definition: path:
-      self.callPackage (self.fetchFromGitHub (builtins.fromJSON (builtins.readFile definition)) + path) {};
+let fetchPackage = pkgs: definition: path:
+      pkgs.callPackage (pkgs.fetchFromGitHub (builtins.fromJSON (builtins.readFile definition)) + path) {};
 in
-  self: { ... }:
+  final: prev:
     {
-      posix-toolbox = fetchPackage self ./ptitfred-posix-toolbox.json "/nix/default.nix";
+      posix-toolbox = fetchPackage final ./ptitfred-posix-toolbox.json "/nix/default.nix";
+      ptitfred = prev.ptitfred // { nginx = prev.ptitfred.nginx.override { baseUrl = "http://localhost:8000"; }; };
     }
