@@ -80,6 +80,12 @@
           inherit (scripts) take-screenshots;
           inherit scripting;
           nginx-root = pkgs.ptitfred.nginx.root;
+          integration-tests-github =
+            pkgs.callPackage ./tests.nix {
+              cores = 2;
+              memorySize = 4096;
+              testing-python = pkgs.callPackage "${nixpkgs}/nixos/lib/testing-python.nix" {};
+            };
         };
 
         apps.${system} = {

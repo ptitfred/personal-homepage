@@ -1,14 +1,12 @@
-{ system ? builtins.currentSystem
-, pkgs ? import <nixpkgs> { inherit system; }
-, cores ? 1
-, memorySize ? 256
+{ pkgs
+, cores
+, memorySize
+, testing-python
 }:
 
-with import <nixpkgs/nixos/lib/testing-python.nix> { inherit system pkgs; };
-
-let nginx = (pkgs.callPackage ./. {}).ptitfred.nginx.override { baseUrl = "http://localhost"; };
+let nginx = pkgs.ptitfred.nginx.override { baseUrl = "http://localhost"; };
 in
-  makeTest {
+  testing-python.makeTest {
     name = "personal-homepage-hosting";
     nodes.machine = { ... }: {
       virtualisation = {
