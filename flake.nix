@@ -8,9 +8,13 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+    posix-toolbox = {
+      url = "github:ptitfred/posix-toolbox";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, gitignore, ... }:
+  outputs = { self, nixpkgs, gitignore, posix-toolbox, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system overlays; };
@@ -24,24 +28,66 @@
           name = "personal-homepage";
           paths = [ scripting (website baseUrl) ];
         };
-      tools = pkgs.callPackage ./scripts/package.nix {};
+      scripts = pkgs.callPackage ./scripts/package.nix {};
 
       overlay = final: prev: {
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
-          inherit (tools) take-screenshots;
+          inherit (scripts) take-screenshots;
         };
+        posix-toolbox = prev.callPackage "${posix-toolbox}/nix/default.nix" {};
       };
 
       overlays = [
         overlay
       ];
 
+      tests =
+        let port = "8000";
+            testUrl = "http://localhost:${port}";
+            static = website testUrl;
+         in pkgs.writeShellApplication rec {
+              name = "tests";
+              runtimeInputs = with pkgs; [ python38 imagemagick puppeteer-cli htmlq jq pkgs.posix-toolbox.wait-tcp ];
+              text = ''
+                set -e
+
+                function setup {
+                  mkdir -p screenshots
+                  trap 'kill $COPROC_PID' err exit
+                }
+
+                function serveWebsite {
+                  coproc python3 -m http.server "${port}" --directory "${static}"
+                  wait-tcp ${port}
+                }
+
+                function takeScreenshots {
+                  ${scripts.take-screenshots}/bin/take-screenshots.sh "${testUrl}" screenshots
+                }
+
+                setup
+                serveWebsite
+                takeScreenshots
+              '';
+            };
+
     in
-      {
+      rec {
         overlays.default = overlay;
 
-        packages.${system} = pkgs.ptitfred // { inherit scripting; };
+        packages.${system} = {
+          inherit (scripts) take-screenshots;
+          inherit scripting;
+          nginx-root = pkgs.ptitfred.nginx.root;
+        };
+
+        apps.${system} = {
+          tests = {
+            type = "app";
+            program = "${tests}/bin/tests";
+          };
+        };
 
         devShells.${system}.default = with pkgs; mkShell { buildInputs = [ zola ]; };
       };

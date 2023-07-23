@@ -6,7 +6,7 @@
 
 with import <nixpkgs/nixos/lib/testing-python.nix> { inherit system pkgs; };
 
-let nginx = (pkgs.callPackage ./. {}).nginx.override { baseUrl = "http://localhost"; };
+let nginx = (pkgs.callPackage ./. {}).ptitfred.nginx.override { baseUrl = "http://localhost"; };
 in
   makeTest {
     name = "personal-homepage-hosting";
