@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    previous.url = "github:nixos/nixpkgs/nixos-22.11";
     gitignore.url = "github:hercules-ci/gitignore.nix";
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -14,10 +15,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, gitignore, posix-toolbox, ... }:
+  outputs = { nixpkgs, previous, gitignore, posix-toolbox, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system overlays; };
+
+      previous-pkgs = import previous { inherit system; };
 
       inherit (gitignore.lib) gitignoreSource;
 
@@ -30,7 +33,8 @@
         };
       scripts = pkgs.callPackage ./scripts/package.nix {};
 
-      overlay = final: prev: {
+      overlay = _: prev: {
+        nix-linter = previous-pkgs.nix-linter;
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
           inherit (scripts) take-screenshots;
@@ -66,8 +70,10 @@
             };
         };
 
+      lint = pkgs.callPackage ./lint.nix {};
+
     in
-      rec {
+      {
         overlays.default = overlay;
 
         packages.${system} = {
@@ -86,6 +92,11 @@
           local = {
             type = "app";
             program = "${tests.local}/bin/local";
+          };
+
+          lint = {
+            type = "app";
+            program = "${lint}/bin/lint";
           };
         };
 
