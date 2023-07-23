@@ -1,13 +1,19 @@
-{ pkgs
+{ writeShellApplication
+, python38
+, imagemagick
+, puppeteer-cli
+, htmlq
+, jq
+, posix-toolbox
 , scripts
 , port
 , testUrl
 , static
 }:
 
-pkgs.writeShellApplication {
+writeShellApplication {
   name = "tests";
-  runtimeInputs = with pkgs; [ python38 imagemagick puppeteer-cli htmlq jq pkgs.posix-toolbox.wait-tcp ];
+  runtimeInputs = [ python38 imagemagick puppeteer-cli htmlq jq posix-toolbox.wait-tcp ];
   text = ''
     set -e
 

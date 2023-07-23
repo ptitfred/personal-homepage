@@ -1,10 +1,11 @@
-{ pkgs
+{ httpie
+, ptitfred
 , cores
 , memorySize
 , testing-python
 }:
 
-let nginx = pkgs.ptitfred.nginx.override { baseUrl = "http://localhost"; };
+let nginx = ptitfred.nginx.override { baseUrl = "http://localhost"; };
 in
   testing-python.makeTest {
     name = "personal-homepage-hosting";
@@ -20,7 +21,7 @@ in
         };
       };
 
-      environment.systemPackages = with pkgs; [ httpie ];
+      environment.systemPackages = [ httpie ];
     };
 
     testScript = builtins.readFile ./integration-test.py;
