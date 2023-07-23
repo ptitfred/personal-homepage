@@ -4,9 +4,13 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     gitignore.url = "github:hercules-ci/gitignore.nix";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, gitignore }:
+  outputs = { self, nixpkgs, gitignore, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system overlays; };

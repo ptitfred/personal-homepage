@@ -1,7 +1,4 @@
-{ pkgs ? import <nixpkgs> {}
-, baseUrl ? "https://frederic.menou.me"
+{ system ? builtins.currentSystem
 }:
 
-pkgs.callPackage ./package.nix {
-  inherit baseUrl;
-}
+(import ./flake-compat.nix).packages.${system}
