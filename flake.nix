@@ -31,13 +31,12 @@
           name = "personal-homepage";
           paths = [ scripting (website baseUrl) ];
         };
-      scripts = pkgs.callPackage ./scripts/package.nix {};
 
       overlay = _: prev: {
         nix-linter = previous-pkgs.nix-linter;
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
-          inherit (scripts) take-screenshots;
+          take-screenshots = prev.callPackage scripts/take-screenshots.nix {};
         };
         posix-toolbox = prev.callPackage "${posix-toolbox}/nix/default.nix" {};
       };
@@ -53,7 +52,6 @@
               port = "8000";
               testUrl = "http://localhost:${port}";
               static = website testUrl;
-              inherit scripts;
             };
 
           local =
@@ -77,8 +75,8 @@
         overlays.default = overlay;
 
         packages.${system} = {
-          inherit (scripts) take-screenshots;
-          inherit scripting ;
+          inherit (pkgs.ptitfred) take-screenshots;
+          inherit scripting;
           nginx-root = pkgs.ptitfred.nginx.root;
           integration-tests-github = tests.in-nginx;
         };

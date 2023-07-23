@@ -5,7 +5,7 @@
 , htmlq
 , jq
 , posix-toolbox
-, scripts
+, ptitfred
 , port
 , testUrl
 , static
@@ -28,7 +28,7 @@ writeShellApplication {
     }
 
     function takeScreenshots {
-      ${scripts.take-screenshots}/bin/take-screenshots.sh "${testUrl}" screenshots
+      ${ptitfred.take-screenshots}/bin/take-screenshots "${testUrl}" screenshots
     }
 
     setup

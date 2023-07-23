@@ -40,7 +40,7 @@ function proceed {
 
 function sumUp {
   echo "--"
-  echo "$(find $output -name '*.png' | wc -l) screenshots taken, good bye."
+  echo "$(find "$output" -name '*.png' | wc -l) screenshots taken, good bye."
 }
 
 proceed
