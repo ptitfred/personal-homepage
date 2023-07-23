@@ -15,9 +15,6 @@ let
 
 in
   {
-    clever-cloud = pkgs.callPackage webservers/apache-httpd/package.nix {
-      inherit gitignoreSource content;
-    };
     nginx = pkgs.callPackage webservers/nginx/package.nix {
       root = content;
     };
