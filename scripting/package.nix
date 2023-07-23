@@ -1,9 +1,8 @@
 { pkgs
+, gitignoreSource
 }:
 
 let
-  gitignoreSource = pkgs.callPackage ../gitignore.nix {};
-
   spagoPkgs = pkgs.callPackage ./spago-packages.nix {};
 
   dhallDeps = pkgs.dhallPackages.callPackage ./dhall-dependencies.nix {};

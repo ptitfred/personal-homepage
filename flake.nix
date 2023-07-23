@@ -17,7 +17,7 @@
 
       inherit (gitignore.lib) gitignoreSource;
 
-      scripting = pkgs.callPackage scripting/package.nix {};
+      scripting = pkgs.callPackage scripting/package.nix { inherit gitignoreSource; };
       website = baseUrl: pkgs.callPackage website/package.nix { inherit baseUrl gitignoreSource; };
       root = baseUrl:
         pkgs.symlinkJoin {
