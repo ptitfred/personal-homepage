@@ -51,6 +51,13 @@
               static = website testUrl;
               inherit scripts;
             };
+
+          local =
+            pkgs.callPackage tests/local.nix rec {
+              port = "8000";
+              static = website "http://localhost:${port}";
+            };
+
           in-nginx =
             pkgs.callPackage tests/in-nginx.nix {
               cores = 2;
@@ -74,6 +81,11 @@
           tests = {
             type = "app";
             program = "${tests.screenshots}/bin/tests";
+          };
+
+          local = {
+            type = "app";
+            program = "${tests.local}/bin/local";
           };
         };
 
