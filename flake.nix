@@ -43,34 +43,21 @@
       ];
 
       tests =
-        let port = "8000";
-            testUrl = "http://localhost:${port}";
-            static = website testUrl;
-         in pkgs.writeShellApplication rec {
-              name = "tests";
-              runtimeInputs = with pkgs; [ python38 imagemagick puppeteer-cli htmlq jq pkgs.posix-toolbox.wait-tcp ];
-              text = ''
-                set -e
-
-                function setup {
-                  mkdir -p screenshots
-                  trap 'kill $COPROC_PID' err exit
-                }
-
-                function serveWebsite {
-                  coproc python3 -m http.server "${port}" --directory "${static}"
-                  wait-tcp ${port}
-                }
-
-                function takeScreenshots {
-                  ${scripts.take-screenshots}/bin/take-screenshots.sh "${testUrl}" screenshots
-                }
-
-                setup
-                serveWebsite
-                takeScreenshots
-              '';
+        {
+          screenshots =
+            pkgs.callPackage tests/screenshots.nix rec {
+              port = "8000";
+              testUrl = "http://localhost:${port}";
+              static = website testUrl;
+              inherit scripts;
             };
+          in-nginx =
+            pkgs.callPackage tests/in-nginx.nix {
+              cores = 2;
+              memorySize = 4096;
+              testing-python = pkgs.callPackage "${nixpkgs}/nixos/lib/testing-python.nix" {};
+            };
+        };
 
     in
       rec {
@@ -78,20 +65,15 @@
 
         packages.${system} = {
           inherit (scripts) take-screenshots;
-          inherit scripting;
+          inherit scripting ;
           nginx-root = pkgs.ptitfred.nginx.root;
-          integration-tests-github =
-            pkgs.callPackage ./tests.nix {
-              cores = 2;
-              memorySize = 4096;
-              testing-python = pkgs.callPackage "${nixpkgs}/nixos/lib/testing-python.nix" {};
-            };
+          integration-tests-github = tests.in-nginx;
         };
 
         apps.${system} = {
           tests = {
             type = "app";
-            program = "${tests}/bin/tests";
+            program = "${tests.screenshots}/bin/tests";
           };
         };
 
