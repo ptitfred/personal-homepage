@@ -10,10 +10,7 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    posix-toolbox = {
-      url = "github:ptitfred/posix-toolbox";
-      flake = false;
-    };
+    posix-toolbox.url = "github:ptitfred/posix-toolbox";
   };
 
   outputs = { nixpkgs, previous, gitignore, posix-toolbox, ... }:
@@ -39,11 +36,11 @@
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
           take-screenshots = prev.callPackage scripts/take-screenshots.nix {};
         };
-        posix-toolbox = prev.callPackage "${posix-toolbox}/nix/default.nix" {};
       };
 
       overlays = [
         overlay
+        posix-toolbox.overlay
       ];
 
       tests =
