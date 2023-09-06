@@ -1,9 +1,5 @@
 { writeShellApplication
 , python38
-, imagemagick
-, puppeteer-cli
-, htmlq
-, jq
 , posix-toolbox
 , ptitfred
 , port
@@ -13,7 +9,7 @@
 
 writeShellApplication {
   name = "tests";
-  runtimeInputs = [ python38 imagemagick puppeteer-cli htmlq jq posix-toolbox.wait-tcp ];
+  runtimeInputs = [ python38 posix-toolbox.wait-tcp ptitfred.take-screenshots ];
   text = ''
     set -e
 
@@ -28,7 +24,7 @@ writeShellApplication {
     }
 
     function takeScreenshots {
-      ${ptitfred.take-screenshots}/bin/take-screenshots "${testUrl}" screenshots
+      take-screenshots "${testUrl}" screenshots
     }
 
     setup
