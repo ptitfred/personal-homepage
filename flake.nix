@@ -2,7 +2,7 @@
   description = "Personal homepage (frederic.menou.me)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     previous.url = "github:nixos/nixpkgs/nixos-22.11";
     gitignore.url = "github:hercules-ci/gitignore.nix";
     gitignore.inputs.nixpkgs.follows = "nixpkgs";
@@ -11,9 +11,10 @@
       flake = false;
     };
     posix-toolbox.url = "github:ptitfred/posix-toolbox";
+    easy-ps.url = "github:justinwoo/easy-purescript-nix";
   };
 
-  outputs = { nixpkgs, previous, gitignore, posix-toolbox, ... }:
+  outputs = { nixpkgs, previous, gitignore, posix-toolbox, easy-ps, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system overlays; };
@@ -32,6 +33,7 @@
 
       overlay = _: prev: {
         nix-linter = previous-pkgs.nix-linter;
+        easy-ps = easy-ps.packages.${system};
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
           take-screenshots = prev.callPackage scripts/take-screenshots.nix {};
