@@ -18,7 +18,7 @@ in
     nativeBuildInputs = with pkgs; [
       purescript
       esbuild
-      spago
+      easy-ps.spago
       git
     ];
 
