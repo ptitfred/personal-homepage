@@ -92,6 +92,13 @@
             program = "${tests.local}/bin/local";
           };
 
+          dev-server = {
+            type = "app";
+            program =
+              let script = pkgs.writeShellScriptBin "zola-dev-server" "${pkgs.zola}/bin/zola -r $1 serve";
+               in "${script}/bin/zola-dev-server";
+          };
+
           lint = {
             type = "app";
             program = "${lint}/bin/lint";
