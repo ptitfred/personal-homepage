@@ -14,7 +14,7 @@ I pouet'ed twice while on end-of-year holidays about this past year, as it's the
 
 {{ pouet(url="https://pouet.chapril.org/@ptitfred/111682108611942901") }}
 
-It's quite short and it doesn't elaborate on up and downs, and reasons and contexts. I took some time to give you some details.
+It's quite short and it doesn't elaborate on ups and downs, and reasons and contexts. I took some time to give you some details.
 
 ## A strange year
 
