@@ -126,7 +126,7 @@ Two quick nuggets: [passing arguments](https://just.systems/man/en/chapter_38.ht
 
 For example, [here](https://github.com/ptitfred/personal-homepage/blob/main/justfile) is the justfile for the source of this website:
 
-```just
+```Just
 lint:
   nix run .#lint
 
@@ -197,9 +197,12 @@ jsonpath "$.email"    == "frederic.menou@gmail.com"
 jsonpath "$.fullname" == "Frédéric Menou"
 ```
 
-I'm not it changed my life, but it's for sure a big "WOW" of 2023 for me.
+_(Unfortunately [Zola] doesn't highlight hurl files yet. Zola uses sublime text syntax files and I couldn't find any at the time of writing this post.)_
+
+I'm not sure Hurl changed my life, but it's been a big "WOW" of 2023.
 
 [Hurl]: https://hurl.dev/
+[Zola]: https://www.getzola.org/
 
 ## The pipes library is amazing
 
