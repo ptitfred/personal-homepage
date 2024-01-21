@@ -222,7 +222,85 @@ I also used [mantine] for some personal or professional projects, and I felt the
 
 But I learned a lot regarding Purescript internals. For instance I had to routinely "convert" from typical Purescript datatypes (closed sum types to make it very hard for the user to misuse the library) to javascript datatypes (strings, numbers, "object"s, arrays, badly typed effects) and this lead to the [`Mantine.FFI` module](https://github.com/funky-thunks/purescript-mantine/blob/main/src/Mantine/FFI.purs).
 
-In this module I had to write conversion functions for an extensive set of pairs of types. For most of them it's trivial (identity function, or fmap to the generic type). For others it's a bit trickier (effects are curried and therefore need a bit of plumbing). And the really hairy part is about Records for which you need to dive into [`RowToList`](https://pursuit.purescript.org/builtins/docs/Prim.RowList). The official documentation is pretty unhelpful and I had to piggyback on old [blogpost](https://liamgoodacre.github.io/purescript/rows/records/2017/07/10/purescript-row-to-list.html)s or [gist](https://gist.github.com/i-am-tom/355987ba2b972d4da16635626b27f42e)s and fight with the compiler until [success](https://github.com/funky-thunks/purescript-mantine/commit/9ba12f79aff53ff36bf10be7e98e9350ba5aa3bc#diff-945c6508eb5695eb9ce50c47df90e2479cf0c9c20c8ae4d6962ea098d8e0a97aR65-R98)!
+```purescript
+class ToFFI ps js | ps -> js where
+  toNative :: ps -> js
+```
+
+In this module I had to write conversion functions for an extensive set of pairs of types. For most of them it's trivial (identity function, or fmap to the generic type).
+
+```purescript
+instance ToFFI Unit Unit where
+  toNative = identity
+
+instance ToFFI Boolean Boolean where
+  toNative = identity
+
+instance ToFFI Char Char where
+  toNative = identity
+
+instance ToFFI Int Number where
+  toNative = toNumber
+
+instance ToFFI Number Number where
+  toNative = identity
+
+instance ToFFI String String where
+  toNative = identity
+
+instance ToFFI abstract native => ToFFI (Array abstract) (Array native) where
+  toNative = map toNative
+
+instance ToFFI abstract native => ToFFI (Maybe abstract) (Nullable native) where
+  toNative m = toNullable (map toNative m)
+```
+
+For others it's a bit trickier (effects are curried and therefore need a bit of plumbing).
+
+```purescript
+instance (FromFFI arg0JS arg0PS, ToFFI resultPS resultJS) => ToFFI (arg0PS -> Effect resultPS) (EffectFn1 arg0JS resultJS) where
+  toNative f = mkEffectFn1 (toNative <<< f <<< fromNative)
+else instance (FromFFI arg0JS arg0PS, FromFFI arg1JS arg1PS, ToFFI resultPS resultJS) => ToFFI (arg0PS -> arg1PS -> Effect resultPS) (EffectFn2 arg0JS arg1JS resultJS) where
+  toNative f = mkEffectFn2 (\ arg0 arg1 -> toNative (f (fromNative arg0) (fromNative arg1)))
+else instance (FromFFI arg0JS arg0PS, ToFFI resultPS resultJS) => ToFFI (arg0PS -> resultPS) (arg0JS -> resultJS) where
+  toNative f = toNative <<< f <<< fromNative
+```
+
+And the really hairy part is about Records for which you need to dive into [`RowToList`](https://pursuit.purescript.org/builtins/docs/Prim.RowList). The official documentation is pretty unhelpful and I had to piggyback on old [blogpost](https://liamgoodacre.github.io/purescript/rows/records/2017/07/10/purescript-row-to-list.html)s or [gist](https://gist.github.com/i-am-tom/355987ba2b972d4da16635626b27f42e)s and fight with the compiler until [success](https://github.com/funky-thunks/purescript-mantine/commit/9ba12f79aff53ff36bf10be7e98e9350ba5aa3bc#diff-945c6508eb5695eb9ce50c47df90e2479cf0c9c20c8ae4d6962ea098d8e0a97aR65-R98)!
+
+```purescript
+instance ( RowToList abstractFields abstractFieldList
+         , RecordToFFI abstractFieldList abstractFields nativeFields
+         ) => ToFFI (Record abstractFields) (Record nativeFields) where
+ toNative = recordToNative Proxy
+
+class RecordToFFI (abstractFieldList :: RowList Type) (abstractFields :: Row Type) (nativeFields :: Row Type)
+                  | abstractFieldList -> abstractFields
+                  , abstractFieldList -> nativeFields   where
+  recordToNative
+    :: RowToList abstractFields abstractFieldList
+    => Proxy abstractFieldList
+    -> Record abstractFields
+    -> Record nativeFields
+
+instance ( IsSymbol key
+         , Cons     key abstract abstractRecordTail abstractRecord
+         , Cons     key native   nativeRecordTail   nativeRecord
+         , Lacks    key nativeRecordTail
+         , Lacks    key abstractRecordTail
+         , ToFFI abstract native
+         , RecordToFFI abstractTail abstractRecordTail nativeRecordTail
+         , RowToList abstractRecordTail abstractTail
+         ) => RecordToFFI (Cons key abstract abstractTail) abstractRecord nativeRecord where
+  recordToNative _ obj =
+    let name = Proxy :: Proxy key
+        head = toNative (get name obj)
+        tail = recordToNative Proxy (delete name obj)
+     in insert name head tail
+
+instance RecordToFFI Nil any () where
+  recordToNative _ _ = {}
+```
 
 Let's say that all of this was mostly to hide the dirty details of Javascript (null and undefined, erk) and JSX (everything is automagic and properties are optionals, erk). Maybe I should stop worrying and just right dumb and buggy javascript for my SPAs :/
 
