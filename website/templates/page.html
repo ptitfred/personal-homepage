@@ -15,6 +15,39 @@
   <meta property="og:locale" content="en_GB" />
   <meta property="og:site_name" content="Frédéric Menou's blog" />
   <meta property="og:type" content="article" />
+  <style>
+    pre {
+      padding: 0.7em;
+      overflow: auto;
+    }
+    /* The line numbers already provide some kind of left/right padding */
+    pre[data-linenos] {
+      /* padding: 1rem 0; */
+    }
+    pre table td {
+      padding: 0 0.3em;
+    }
+    /* The line number cells */
+    pre table td:nth-of-type(1) {
+      text-align: right;
+      user-select: none;
+      opacity: 0.5;
+    }
+    pre table td:nth-of-type(2) {
+      padding-left: 1em;
+    }
+    pre mark {
+      /* If you want your highlights to take the full width. */
+      display: block;
+      /* The default background colour of a mark is bright yellow */
+      background: unset !important;
+      color: yellow;
+    }
+    pre table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  </style>
 {% endblock header %}
 
 {% block content %}
