@@ -51,7 +51,7 @@
 {% endblock header %}
 
 {% block content %}
-  <article class="blog-post">
+  <article class="blog-post {% if page.toc %} with-toc {% endif %}">
     <nav>
       <!-- Author: https://www.svgrepo.com/svg/41905/left-arrow -->
       <svg class=icon version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -69,6 +69,7 @@
         {% set ancestor = get_section(path=ancestor_path) %}
         <li><a href="{{ ancestor.permalink }}">{{ ancestor.title }}</a></li>
         {% endfor %}
+        <li><a href="{{ page.permalink }}#">{{page.title}}</a></li>
       </ul>
     </nav>
     <hgroup>
@@ -85,8 +86,9 @@
       {{ page.reading_time }} minutes
     </div>
     {% endif %}
-    <div class="content">
-      {% if page.toc %}
+    {% if page.toc %}
+      <div class="toc">
+        <div>
           <p>Table of content:</p>
           <ul>
           {% for h1 in page.toc %}
@@ -104,9 +106,9 @@
               </li>
           {% endfor %}
           </ul>
-          <hr/>
-      {% endif %}
-      {{ page.content | safe }}
-    </div>
+        </div>
+      </div>
+    {% endif %}
+    {{ page.content | safe }}
   </article>
 {% endblock content %}
