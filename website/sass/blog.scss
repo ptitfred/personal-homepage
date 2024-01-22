@@ -1,14 +1,45 @@
 @import 'base';
 
+body {
+  padding: unset;
+}
+
 article.blog-post {
-  margin: 24px 0 0 128px;
-  max-width: 540px;
+  --header-offset: 4rem;
+  --toc-width: 30ch;
+
+  display: grid;
+  grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, 100%)) [title-end content-end right-gutter-start] 1em [wide-end wide-header-end header-end right-gutter-end] 1fr [full-end];
+  grid-column-gap: 1em;
+
+  &.with-toc {
+    grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, 100%)) [title-end content-end right-gutter-start] 1em [right-gutter-end wide-end side-panel-start] var(--toc-width) [start-panel-end wide-header-end header-end] 1fr [full-end];
+    grid-template-rows: repeat(4, max-content) [main-start] repeat(1000, max-content) [main-end];
+  }
+
+  > * {
+    grid-column: content;
+    display: block;
+  }
+
+  > .toc {
+    grid-column: side-panel;
+    grid-row: main;
+    font-size: 0.9em;
+    max-width: var(--toc-width);
+    > div {
+      position: sticky;
+      top: var(--header-offset);
+    }
+  }
 
   h2 {
-    a.zola-anchor {
-      position: relative;
-      left: -32px;
-      margin-right: -19px;
+    text-decoration: underline #28455D;
+    grid-column: title;
+    display: grid;
+    grid-template-columns: subgrid;
+
+    a.zola-anchor.zola-anchor {
       text-decoration: none;
       opacity: 0.5;
       &:hover {
@@ -22,40 +53,61 @@ article.blog-post {
     font-size: 12px;
   }
 
+  h1 {
+    font-size: 24px;
+  }
+
   .description {
+    grid-column: content;
     margin-top: 6px;
+    font-size: 16px;
   }
 
   hr {
     color: #444;
   }
 
-  .content {
-    margin-top: 30px;
+  h1 {
+    margin: 32px 0 16px 0;
+  }
 
-    h1 {
-      margin: 32px 0 16px 0;
-    }
+  img {
+    max-width: 100%;
+  }
 
+  figure.banner {
+    margin: 20px 0;
+    grid-column: wide;
+    object-fit: cover;
     img {
-      max-width: 100%;
+      width: 100%;
+      filter: grayscale(0.5);
     }
+  }
 
-    figure.banner {
-      margin: 20px 0;
-      img {
-        filter: grayscale(0.5);
-      }
-    }
+  p, ol, ul {
+    color: #ccc;
+  }
 
-    p, ol, ul {
-      color: #ccc;
-      margin: 20px 0;
-    }
+  p {
+    margin: 10px 0;
+  }
 
-    ol li {
-      list-style-type: decimal;
-    }
+  ol, ul {
+    padding-left: 1em;
+    margin: 0;
+  }
+
+  p + ol, p + ul {
+    margin-top: -0.4em;
+    margin-bottom: 0.4em;
+  }
+
+  ol li {
+    list-style-type: decimal;
+  }
+  [id] {
+    scroll-margin-top: var(--header-offset);
   }
 
   hgroup {
@@ -63,6 +115,7 @@ article.blog-post {
       margin: 0;
     }
 
+    grid-column: content;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -71,21 +124,26 @@ article.blog-post {
   }
 
   nav {
-    position: relative;
-    left: -40px;
-    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: subgrid;
+    padding: 32px 0 20px 0;
+    grid-column: wide-header;
+    z-index: 10;
+
+    position: sticky;
+    top: -24px;
+    background: linear-gradient(#131116, #131116 80%, #13111600);
 
     svg.icon {
       width: 16px;
       height: 16px;
       fill: white;
-      position: relative;
-      top: 3px;
-      margin-right: 24px;
+      padding-top: 3px;
     }
 
     ul {
       display: inline-flex;
+      flex-wrap: wrap;
       margin: 0;
       padding: 0;
       gap: 12px;
@@ -114,31 +172,41 @@ article.blog-post {
   }
 
   .reading-time {
+    grid-column: header;
     font-size: 12px;
     color: darkgray;
     margin-top: 6px;
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   article.blog-post {
-    margin: 0;
+    grid-column-gap: unset;
+    &.with-toc {
+      grid-template-columns: revert;
+      grid-template-rows: unset;
+      grid-template-columns: 1fr [full-start] 1em [left-gutter-start wide-header-start wide-start title-start left-gutter-end header-start content-start] calc(min(65ch, 100%)) [title-end content-end right-gutter-start wide-end wide-header-end header-end right-gutter-end] 1em [full-end] 1fr;
+    }
+    > .toc {
+      grid-column: content;
+      grid-row: unset;
+      max-width: unset;
+    }
 
     hgroup {
       flex-direction: column;
     }
 
     nav {
-      position: static;
-      margin-bottom: 16px;
-
-      svg.icon {
-        margin-right: 16px;
-      }
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      top: 0;
     }
 
-    .content {
-      margin-top: 24px;
+    h2 {
+      display: flex;
+      gap: 1rem;
     }
   }
 }
