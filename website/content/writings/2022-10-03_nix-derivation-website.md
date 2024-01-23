@@ -9,6 +9,14 @@ programming-languages = ["nix"]
 tags = ["nix", "english"]
 +++
 
+{% announce() %}
+**As of 2024-01-23**
+- I've migrated the hosting to a dedicated VPS at [Gandi](https://gandi.net) using NixOS and nginx.
+- This is now done with Flakes, I'll post a follow-up soon.
+
+This blog post should therefore be taken with a grain of salt.
+{% end %}
+
 ## Hosted on Clever-Cloud
 
 This blog is (currently) hosted on [Clever-Cloud](https://www.clever-cloud.com), a PaaS.

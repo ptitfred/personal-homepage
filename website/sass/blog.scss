@@ -22,6 +22,16 @@ article.blog-post {
     display: block;
   }
 
+  > .announce {
+    grid-column: left-gutter-start / content-end;
+    border: 1px solid #FFD43BCC;
+    border-radius: 8px;
+    color: white;
+    background: #FFD43B22;
+    padding: 0.2em 1em;
+    margin-top: 1em;
+  }
+
   > .toc {
     grid-column: side-panel;
     grid-row: main;
