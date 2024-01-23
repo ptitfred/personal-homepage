@@ -14,6 +14,13 @@ in
         inherit cores memorySize;
       };
 
+      users.users.test_user = {
+        isNormalUser = true;
+        description = "Test User";
+        password = "foobar";
+        uid = 1000;
+      };
+
       services.nginx.enable = true;
       services.nginx.virtualHosts.local = {
         locations."/" = {
@@ -21,7 +28,7 @@ in
         };
       };
 
-      environment.systemPackages = [ httpie ];
+      environment.systemPackages = [ httpie ptitfred.take-screenshots ];
     };
 
     testScript = builtins.readFile ./integration-test.py;
