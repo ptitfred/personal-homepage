@@ -5,15 +5,15 @@ body {
 }
 
 article.blog-post {
-  --header-offset: 4rem;
+  --header-offset: 6rem;
   --toc-width: 30ch;
 
   display: grid;
-  grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, 100%)) [title-end content-end right-gutter-start] 1em [wide-end wide-header-end header-end right-gutter-end] 1fr [full-end];
+  grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, calc(100% - 2em))) [title-end content-end right-gutter-start] 1em [wide-end wide-header-end header-end right-gutter-end] 1fr [full-end];
   grid-column-gap: 1em;
 
   &.with-toc {
-    grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, 100%)) [title-end content-end right-gutter-start] 1em [right-gutter-end wide-end side-panel-start] var(--toc-width) [start-panel-end wide-header-end header-end] 1fr [full-end];
+    grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, calc(100% - var(--toc-width) - 2em))) [title-end content-end right-gutter-start] 1em [right-gutter-end wide-end side-panel-start] var(--toc-width) [start-panel-end wide-header-end header-end] 1fr [full-end];
     grid-template-rows: repeat(4, max-content) [main-start] repeat(1000, max-content) [main-end];
   }
 
@@ -111,16 +111,46 @@ article.blog-post {
   }
 
   hgroup {
-    h1, p {
+    h1 {
       margin: 0;
+      grid-column: content;
+      display: inline-flex;
+      justify-content: space-between;
+      a {
+        font-size: 12px;
+        svg {
+          height: 16px;
+          width: 16px;
+          fill: #ccc;
+          padding-top: 8px;
+        }
+      }
     }
+    display: grid;
+    grid-template-columns: subgrid;
 
-    grid-column: content;
-    display: flex;
-    flex-wrap: wrap;
+    grid-column: wide;
     gap: 8px;
     justify-content: space-between;
     align-items: baseline;
+
+    position:sticky;
+    top: 3rem; // var(--header-offset);
+    background: #131116;
+    z-index: 10;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+
+  hgroup::after {
+    content: "";
+    background: linear-gradient(#131116, #13111600);
+    z-index: 20;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -8px;
+    height: 8px;
+    width: 100%;
   }
 
   nav {
@@ -132,7 +162,7 @@ article.blog-post {
 
     position: sticky;
     top: -24px;
-    background: linear-gradient(#131116, #131116 80%, #13111600);
+    background: #131116; // linear-gradient(#131116, #131116 80%, #13111600);
 
     svg.icon {
       width: 16px;
@@ -185,16 +215,12 @@ article.blog-post {
     &.with-toc {
       grid-template-columns: revert;
       grid-template-rows: unset;
-      grid-template-columns: 1fr [full-start] 1em [left-gutter-start wide-header-start wide-start title-start left-gutter-end header-start content-start] calc(min(65ch, 100%)) [title-end content-end right-gutter-start wide-end wide-header-end header-end right-gutter-end] 1em [full-end] 1fr;
+      grid-template-columns: 1fr [full-start] 1em [left-gutter-start wide-header-start wide-start title-start left-gutter-end header-start content-start] calc(min(65ch, calc(100% - 2em))) [title-end content-end right-gutter-start wide-end wide-header-end header-end right-gutter-end] 1em [full-end] 1fr;
     }
     > .toc {
       grid-column: content;
       grid-row: unset;
       max-width: unset;
-    }
-
-    hgroup {
-      flex-direction: column;
     }
 
     nav {
