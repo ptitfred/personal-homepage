@@ -70,6 +70,17 @@
 
       lint = pkgs.callPackage ./lint.nix {};
 
+      mkCheck = name: checkPhase:
+        pkgs.stdenvNoCC.mkDerivation {
+          inherit name checkPhase;
+          dontBuild = true;
+          src = ./.;
+          doCheck = true;
+          installPhase = ''
+            mkdir "$out"
+          '';
+        };
+
     in
       {
         overlays.default = overlay;
@@ -78,7 +89,7 @@
           inherit (pkgs.ptitfred) take-screenshots;
           inherit scripting;
           nginx-root = pkgs.ptitfred.nginx.root;
-          integration-tests-github = tests.in-nginx;
+          integration-tests = tests.in-nginx;
         };
 
         apps.${system} = {
@@ -103,6 +114,13 @@
             type = "app";
             program = "${lint}/bin/lint";
           };
+        };
+
+        checks.${system} = {
+          lint =
+            mkCheck "lint-nix" ''
+              ${lint}/bin/lint
+            '';
         };
 
         devShells.${system}.default = with pkgs; mkShell { buildInputs = [ zola ]; };
