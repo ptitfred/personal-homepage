@@ -1,6 +1,11 @@
+body {
+  padding-inline: unset;
+}
+
 article.section {
   display: grid;
-  grid-template-columns: [full-start] 1fr [content-start] min(80ch, 100%) [content-end] 1fr [full-end];
+  grid-template-columns: [full-start] 1fr [content-start] min(80ch, calc(100% - 3em)) [content-end] 1fr [full-end];
+  grid-column-gap: 1.5em;
 
   > * {
     grid-column: content;
