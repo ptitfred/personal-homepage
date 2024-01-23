@@ -1,6 +1,5 @@
 { nix-linter
 , writeShellApplication
-, spago
 }:
 
 writeShellApplication {
