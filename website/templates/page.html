@@ -73,6 +73,7 @@
     </nav>
     <hgroup>
       <h1 class="title">{{ page.title }}
+        {% if page.reading_time > 1 %}
         <a href="#">
           <svg class=icon version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              width="400.004px" height="400.004px" viewBox="0 0 400.004 400.004"
@@ -84,7 +85,7 @@
                 C400.004,190.438,392.251,182.686,382.688,182.686z"/>
             </g>
           </svg>
-        </a></h1>
+        </a>{% endif %}</h1>
     </hgroup>
     {% if page.description %}
     <div class="description">
@@ -92,9 +93,11 @@
     </div>
     {% endif %}
     <div class="reading-time">
-      Initially published on {{ page.date }}
+      {% if page.date %}
+        Initially published on {{ page.date }}.
+      {% endif %}
       {% if page.reading_time > 1 %}
-        - around {{ page.reading_time }} minutes to read
+        Around {{ page.reading_time }} minutes to read.
       {% endif %}
     </div>
     {% if page.toc %}
