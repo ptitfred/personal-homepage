@@ -1,5 +1,21 @@
+body {
+  max-width: unset;
+  margin-left: unset;
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns:
+    [full-start] 1fr [wide-start] calc(minmax(0, 1em)) [content-start] calc(min(60ch, 100% - 2em)) [content-end] calc(minmax(0, 1em)) [wide-end] 1fr [full-end];
+  grid-column-gap: 1em;
+  grid-row-gap: 2em;
+
+  > * {
+    grid-column: content;
+  }
+}
+
 nav {
   display: flex;
+  grid-column: wide;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0 12px;
@@ -27,10 +43,16 @@ nav {
   }
 }
 
+section {
+  > :first-child {
+    margin-top: 0;
+  }
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
 @media screen and (min-width: 780px) {
   body {
-    max-width: 780px;
-    margin-left: 100px;
-    margin-top: 30px;
   }
 }
