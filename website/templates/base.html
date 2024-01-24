@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ get_url(path="style.css", cachebust=true) }}" rel="stylesheet">
+    <link href="{{ get_url(path="atom.xml") }}" rel="alternate" type="application/atom+xml" />
     <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
     <meta property="twitter:url" content="{{ config.base_url | safe }}">
     {% if page %}
