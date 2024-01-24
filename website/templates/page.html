@@ -101,7 +101,7 @@
       {% endif %}
     </div>
     {% if page.toc %}
-      <div class="toc">
+      <aside class="toc">
         <div>
           <p>Table of content:</p>
           <ul>
@@ -121,7 +121,7 @@
           {% endfor %}
           </ul>
         </div>
-      </div>
+      </aside>
     {% endif %}
     {{ page.content | safe }}
   </article>

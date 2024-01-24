@@ -99,6 +99,28 @@ article.blog-post {
     }
   }
 
+  figure.figure {
+    grid-column: wide;
+    margin-inline: unset;
+    display: grid;
+    grid-template-columns: subgrid;
+
+    img {
+      grid-column: wide;
+    }
+
+    margin-block: 2em;
+
+    figcaption {
+      grid-column: content;
+      font-size: 0.8em;
+      margin-inline: 4em;
+      margin-block: 1em 0;
+      text-align: center;
+      p { display: inline; }
+    }
+  }
+
   p, ol, ul {
     color: #ccc;
   }
@@ -251,6 +273,10 @@ article.blog-post {
     h2 {
       display: flex;
       gap: 1rem;
+    }
+
+    figure.figure {
+      margin-block: 1em;
     }
   }
 }
