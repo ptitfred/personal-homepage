@@ -6,16 +6,16 @@ body {
 
 article.blog-post {
   --header-offset: 6rem;
-  --toc-width: 30ch;
+  --side-panel-width: 30ch;
 
   display: grid;
   grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, calc(100% - 2em))) [title-end content-end right-gutter-start] 1em [wide-end wide-header-end header-end right-gutter-end] 1fr [full-end];
   grid-column-gap: 1em;
 
-  &.with-toc {
-    grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, calc(100% - var(--toc-width) - 2em))) [title-end content-end right-gutter-start] 1em [right-gutter-end wide-end side-panel-start] var(--toc-width) [start-panel-end wide-header-end header-end] 1fr [full-end];
-    grid-template-rows: repeat(4, max-content) [main-start] repeat(1000, max-content) [main-end];
-  }
+  margin-bottom: 4em;
+
+  grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start wide-start title-start] 1em [left-gutter-end header-start content-start] calc(min(65ch, calc(100% - var(--side-panel-width) - 3em))) [title-end content-end right-gutter-start] 1em [right-gutter-end wide-end] 1em [side-panel-start] var(--side-panel-width) [start-panel-end wide-header-end header-end] 1fr [full-end];
+  grid-template-rows: repeat(3, max-content) [main-start] repeat(1000, max-content) [main-end];
 
   > * {
     grid-column: content;
@@ -23,7 +23,7 @@ article.blog-post {
   }
 
   > .announce {
-    grid-column: left-gutter-start / content-end;
+    grid-column: wide;
     border: 1px solid #FFD43BCC;
     border-radius: 8px;
     color: white;
@@ -32,22 +32,51 @@ article.blog-post {
     margin-top: 1em;
   }
 
-  > .toc {
+  div.footer {
+    display: none;
+  }
+
+  > .side-panel {
     grid-column: side-panel;
     grid-row: main;
     font-size: 0.9em;
-    max-width: var(--toc-width);
+    max-width: var(--side-panel-width);
+    h3 {
+      margin-block: 10px;
+    }
+    hr {
+      margin-block: 2em;
+    }
+    p {
+      margin-block: 1em;
+    }
     > div {
       position: sticky;
       top: var(--header-offset);
     }
+    div.block {
+      --block-spacing: 1.5em;
+      padding-top: var(--block-spacing);
+      margin-top: var(--block-spacing);
+      border-top: 1px solid grey;
+    }
+    div.block:first-child {
+      border-top: revert;
+      margin-top: revert;
+      padding-top: revert;
+    }
+  }
+
+  aside + h2,
+  aside + ul,
+  aside + ol,
+  aside + p {
+    margin-top: 10px;
   }
 
   h2 {
     text-decoration: underline #28455D;
     grid-column: content;
-    display: grid;
-    grid-template-columns: subgrid;
     display: flex;
     flex-direction: row-reverse;
     justify-content: left;
@@ -62,9 +91,13 @@ article.blog-post {
     }
   }
 
-  .timestamp, .description {
+  .timestamp, .description, .metadata {
     color: darkgray;
     font-size: 12px;
+  }
+
+  .metadata {
+    display: none;
   }
 
   h1 {
@@ -73,7 +106,8 @@ article.blog-post {
 
   .description {
     grid-column: content;
-    margin-top: 6px;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
     font-size: 16px;
   }
 
@@ -248,15 +282,29 @@ article.blog-post {
 @media screen and (max-width: 1000px) {
   article.blog-post {
     grid-column-gap: unset;
-    &.with-toc {
-      grid-template-columns: revert;
-      grid-template-rows: unset;
-      grid-template-columns: 1fr [full-start] 1em [left-gutter-start wide-header-start wide-start title-start left-gutter-end header-start content-start] calc(min(65ch, calc(100% - 2em))) [title-end content-end right-gutter-start wide-end wide-header-end header-end right-gutter-end] 1em [full-end] 1fr;
-    }
-    > .toc {
+    margin-bottom: 2em;
+
+    grid-template-columns: revert;
+    grid-template-rows: unset;
+    grid-template-columns: 1fr [full-start] 1em [left-gutter-start wide-header-start wide-start title-start left-gutter-end header-start content-start] calc(min(65ch, calc(100% - 2em))) [title-end content-end right-gutter-start wide-end wide-header-end header-end right-gutter-end] 1em [full-end] 1fr;
+
+    > .side-panel {
       grid-column: content;
       grid-row: unset;
       max-width: unset;
+      hr {
+        display: none;
+      }
+      h3 {
+        margin-block: 1.5em 0.5em;
+      }
+      div.block {
+        display:none;
+      }
+      div.block.toc {
+        display: block;
+        margin-bottom: 1em;
+      }
     }
 
     nav {
@@ -264,6 +312,10 @@ article.blog-post {
       gap: 1rem;
       padding: 1rem 0;
       top: 0;
+    }
+
+    .metadata {
+      display: revert;
     }
 
     h1 {
@@ -277,6 +329,13 @@ article.blog-post {
 
     figure.figure {
       margin-block: 1em;
+    }
+
+    div.footer {
+      display: revert;
+      margin-top: 1em;
+      border-top: 1px solid grey;
+      padding-top: 0.5em;
     }
   }
 }
