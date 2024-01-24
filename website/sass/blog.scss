@@ -198,14 +198,12 @@ article.blog-post {
     }
     display: grid;
     grid-template-columns: subgrid;
-
     grid-column: wide;
-    gap: 8px;
     justify-content: space-between;
     align-items: baseline;
 
     position:sticky;
-    top: 3rem; // var(--header-offset);
+    top: 3rem;
     background: #131116;
     z-index: 10;
     padding-bottom: 8px;
@@ -232,7 +230,7 @@ article.blog-post {
 
     position: sticky;
     top: -24px;
-    background: #131116; // linear-gradient(#131116, #131116 80%, #13111600);
+    background: #131116;
 
     svg.icon {
       width: 16px;
