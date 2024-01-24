@@ -51,7 +51,7 @@
 {% endblock header %}
 
 {% block content %}
-  <article class="blog-post {% if page.toc %} with-toc {% endif %}">
+  <article class="blog-post">
     <nav>
       <!-- Author: https://www.svgrepo.com/svg/41905/left-arrow -->
       <svg class=icon version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -91,38 +91,75 @@
     <div class="description">
       {{ page.description | markdown(inline=true) | safe }}
     </div>
+    {% if page.date or page.reading_time > 1 %}
+      <p class="metadata">
+        {% if page.date %}
+          Initially published on {{ page.date }}.
+        {% endif %}
+        {% if page.reading_time > 1 %}
+          {% if page.date %}<br>{% endif %}
+          Around {{ page.reading_time }} minutes to read.
+        {% endif %}
+      </p>
     {% endif %}
-    <div class="reading-time">
-      {% if page.date %}
-        Initially published on {{ page.date }}.
-      {% endif %}
-      {% if page.reading_time > 1 %}
-        Around {{ page.reading_time }} minutes to read.
-      {% endif %}
-    </div>
-    {% if page.toc %}
-      <aside class="toc">
-        <div>
-          <p>Table of content:</p>
-          <ul>
-          {% for h1 in page.toc %}
-              <li>
-                  <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-                  {% if h1.children %}
-                      <ul>
-                          {% for h2 in h1.children %}
-                              <li>
-                                  <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                              </li>
-                          {% endfor %}
-                      </ul>
-                  {% endif %}
-              </li>
-          {% endfor %}
-          </ul>
+    {% endif %}
+    <aside class="side-panel">
+      <div>
+        {% if page.toc and (page.extra.hide_toc is not defined) %}
+          <div class="block toc">
+            <h3>Table of content</h3>
+            <ul>
+            {% for h1 in page.toc %}
+                <li>
+                    <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                    {% if h1.children %}
+                        <ul>
+                            {% for h2 in h1.children %}
+                                <li>
+                                    <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <div class="block">
+          <h3>Frédéric Menou</h3>
+          <p>
+            Fullstack developer, CTO, DevOps, you name it
+          </p>
+          <p>
+            <a href="https://www.funkythunks.dev/work-with-me" target="_blank">Wanna work with me?</a>
+          </p>
         </div>
-      </aside>
-    {% endif %}
+        {% if page.date or page.reading_time > 1 %}
+          <div class="block">
+            {% if page.date %}
+              <p>
+                Initially published on {{ page.date }}.
+              </p>
+            {% endif %}
+            {% if page.reading_time > 1 %}
+              <p>
+                Around {{ page.reading_time }} minutes to read.
+              </p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </aside>
     {{ page.content | safe }}
+    <div class="footer">
+      <h3>Frédéric Menou</h3>
+      <p>
+        Fullstack developer, CTO, DevOps, you name it
+      </p>
+      <p>
+        <a href="https://www.funkythunks.dev/work-with-me" target="_blank">Wanna work with me?</a>
+      </p>
+    </div>
   </article>
 {% endblock content %}
