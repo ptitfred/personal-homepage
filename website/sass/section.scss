@@ -1,17 +1,21 @@
 body {
-  padding-inline: unset;
+  padding: unset;
 }
 
 article.section {
   display: grid;
-  grid-template-columns: [full-start] 1fr [content-start] min(80ch, calc(100% - 3em)) [content-end] 1fr [full-end];
-  grid-column-gap: 1.5em;
+  grid-template-columns: [full-start] 1fr [left-gutter-start wide-header-start] 1em [left-gutter-end content-start] min(65ch, calc(100% - 2em)) [content-end wide-header-end right-gutter-start] 1em [right-gutter-end] 1fr [full-end];
+  grid-column-gap: 1em;
 
   > * {
     grid-column: content;
   }
 
   nav {
+    display: grid;
+    grid-template-columns: subgrid;
+    padding: 32px 0 20px 0;
+    grid-column: wide-header;
     margin-bottom: 16px;
     svg.icon {
       width: 16px;
