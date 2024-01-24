@@ -5,6 +5,7 @@ with subtest("Base files present"):
   machine.succeed("http http://localhost/index.html")
   machine.succeed("http http://localhost/sitemap.xml")
   machine.succeed("http http://localhost/robots.txt")
+  machine.succeed("http http://localhost/atom.xml")
 
 with subtest("Legacy URLs still there (by redirections)"):
   machine.succeed("http http://localhost/about.html")
