@@ -9,3 +9,6 @@ local:
 
 tests:
 	nix run .#tests
+
+integration-tests:
+	nix build .#integration-tests
