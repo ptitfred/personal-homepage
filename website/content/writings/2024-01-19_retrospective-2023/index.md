@@ -98,7 +98,9 @@ Having migrated my projects to flakes also let me used a CI tool called [Garnix]
 
 Garnix has this (unique?) feature: it reuses the same nix store for your various builds, making CI **REALLY** fast when few things change. I routinely have pull requests ready to merge under 20 seconds, with the setup phase being the longer (garnix has to assess the work first by evaluating the flake/derivation first).
 
-![An example of a Haskell project with a NixOS module and a NixOS virtual machine for integration testing](./garnix-example-checks-haskell.png)
+{% figure(src="garnix-example-checks-haskell.png", alt="A screenshot of checks in github.") %}
+An example of a Haskell project with a NixOS module and a NixOS virtual machine for integration testing.
+{% end %}
 
 One might argue you have such a feature with caches but if you ever had to maintain a CI configuration, you _know_ how tricky it can be, how painful cache invalidation can be, and that it's usually very specific to every framework or buid toolchain. **Here the caching is by design** (thanks nix) and generalized to the whole tree of dependencies, including the system ones.
 
@@ -116,7 +118,9 @@ I've been using make for the past 10 years to easily start task in a given devel
 
 I'm a hardcore git-rebase user, especially interactive rebase. It's mostly for history rewriting but it's also interesting to launch some task on some git commit of your history with the `exec` action. Having a short command to pass to those actions is quite helpful.
 
-![Example use of the exec action in git-rebase --interactive](git-rebase-interactive-exec.png)
+{% figure(src="git-rebase-interactive-exec.png", alt="A screenshot of my editor when editing git rebase interactive.") %}
+Example use of the exec action in `git-rebase --interactive`
+{% end %}
 
 But Makefiles are a bit rough on the edges, and using it this way is clearly a hack. This past year I've started migrating to [Just].
 
