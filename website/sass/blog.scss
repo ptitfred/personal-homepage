@@ -45,9 +45,13 @@ article.blog-post {
 
   h2 {
     text-decoration: underline #28455D;
-    grid-column: title;
+    grid-column: content;
     display: grid;
     grid-template-columns: subgrid;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    gap: 0.8em;
 
     a.zola-anchor.zola-anchor {
       text-decoration: none;
