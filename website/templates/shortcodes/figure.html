@@ -1,4 +1,4 @@
-<figure class="figure">
+<figure class="figure" id="fig-{{nth}}">
   <img alt="{{ alt }}" src="{{ src }}" title="{{ alt }}">
-  <figcaption>fig {{ nth }} — {{ body | markdown | safe }}</figcaption>
+  <figcaption><a href="#fig-{{nth}}">fig {{ nth }}</a> — {{ body | markdown | safe }}</figcaption>
 </figure>
