@@ -123,13 +123,51 @@ article.blog-post {
     max-width: 100%;
   }
 
-  figure.banner {
+  figure.banner, figure.meme {
     margin: 20px 0;
     grid-column: wide;
-    object-fit: cover;
     img {
       width: 100%;
       filter: grayscale(0.5);
+    }
+    &.bright img {
+      filter: unset;
+    }
+    &.compact img {
+      aspect-ratio: 16/5;
+      object-fit: cover;
+    }
+  }
+
+  figure.meme {
+    display: grid;
+    --meme-max-text-size: 1.8em;
+    --meme-text-size: calc(clamp(calc(var(--meme-max-text-size) / 2), 5vw, var(--meme-max-text-size)));
+    --meme-padding: calc(var(--meme-text-size)/2);
+    grid-template-rows: [full-start] var(--meme-padding) [top-start] 1fr [top-end bottom-start] 1fr [bottom-end] var(--meme-padding) [full-end];
+    grid-template-columns: [meme-start] 100% [meme-end];
+    > * {
+      grid-column: meme;
+    }
+    img {
+      grid-row: full;
+    }
+    .top {
+      grid-row: top;
+      align-self: start;
+    }
+    .bottom {
+      grid-row: bottom;
+      align-self: end;
+    }
+    .top, .bottom {
+      z-index: 5;
+      justify-self: center;
+      font-weight: bold;
+      font-size: var(--meme-text-size);
+      text-shadow: 0 0 4px black;
+      text-transform: uppercase;
+      user-select: none;
     }
   }
 
@@ -277,12 +315,11 @@ article.blog-post {
   }
 }
 
-@media screen and (max-width: 1000px) {
+@mixin single-column {
   article.blog-post {
     grid-column-gap: unset;
     margin-bottom: 2em;
 
-    grid-template-columns: revert;
     grid-template-rows: unset;
     grid-template-columns: 1fr [full-start] 1em [left-gutter-start wide-header-start wide-start title-start left-gutter-end header-start content-start] calc(min(65ch, calc(100% - 2em))) [title-end content-end right-gutter-start wide-end wide-header-end header-end right-gutter-end] 1em [full-end] 1fr;
 
@@ -335,5 +372,29 @@ article.blog-post {
       border-top: 1px solid grey;
       padding-top: 0.5em;
     }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  @include single-column;
+}
+
+@media print {
+  @include single-column;
+
+  article.blog-post {
+    nav {
+      display: none;
+    }
+  }
+
+  figure.meme {
+    .top, .bottom {
+      /* For some unknown reason, we can't have white text here. */
+      color: yellow;
+    }
+  }
+  a.zola-anchor {
+    display: none;
   }
 }

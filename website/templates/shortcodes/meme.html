@@ -1,0 +1,5 @@
+<figure class="meme {%if variant %}{{variant}}{% endif %}">
+  <img alt="{{ alt }} {% if top %}{{ top }}{% endif %} {% if bottom %}{{ bottom }}{% endif %}" src="{{ src }}">
+  <div class="top">{% if top %}{{ top }}{% endif %}</div>
+  <div class="bottom">{% if bottom %}{{ bottom }}{% endif %}</div>
+</figure>
