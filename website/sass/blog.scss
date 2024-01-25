@@ -123,13 +123,51 @@ article.blog-post {
     max-width: 100%;
   }
 
-  figure.banner {
+  figure.banner, figure.meme {
     margin: 20px 0;
     grid-column: wide;
-    object-fit: cover;
     img {
       width: 100%;
       filter: grayscale(0.5);
+    }
+    &.bright img {
+      filter: unset;
+    }
+    &.compact img {
+      aspect-ratio: 16/5;
+      object-fit: cover;
+    }
+  }
+
+  figure.meme {
+    display: grid;
+    --meme-max-text-size: 1.8em;
+    --meme-text-size: calc(clamp(calc(var(--meme-max-text-size) / 2), 5vw, var(--meme-max-text-size)));
+    --meme-padding: calc(var(--meme-text-size)/2);
+    grid-template-rows: [full-start] var(--meme-padding) [top-start] 1fr [top-end bottom-start] 1fr [bottom-end] var(--meme-padding) [full-end];
+    grid-template-columns: [meme-start] 100% [meme-end];
+    > * {
+      grid-column: meme;
+    }
+    img {
+      grid-row: full;
+    }
+    .top {
+      grid-row: top;
+      align-self: start;
+    }
+    .bottom {
+      grid-row: bottom;
+      align-self: end;
+    }
+    .top, .bottom {
+      z-index: 5;
+      justify-self: center;
+      font-weight: bold;
+      font-size: var(--meme-text-size);
+      text-shadow: 0 0 4px black;
+      text-transform: uppercase;
+      user-select: none;
     }
   }
 
