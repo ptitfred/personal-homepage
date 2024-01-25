@@ -64,6 +64,8 @@ Must read notably include:
 [Nix Flakes: Exposing and using NixOS Modules]: https://xeiaso.net/blog/nix-flakes-3-2022-04-07/
 [Incrementally package a Haskell program using Nix]: https://www.haskellforall.com/2022/08/incrementally-package-haskell-program.html
 
+Edit 2024-12-28: I've explained how I've migrated this website to NixOS and flakes in [this blogpost](@/writings/2024-12-28_website-nixos-flakes/index.md).
+
 ## Haskell: bye bye stack, hello cabal and nixpkgs
 
 Speaking of Gabriella's blogpost, I totally ditched [stack] for haskell development and move to cabal via nix.
