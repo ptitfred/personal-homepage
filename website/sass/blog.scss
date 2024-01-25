@@ -315,12 +315,11 @@ article.blog-post {
   }
 }
 
-@media screen and (max-width: 1000px) {
+@mixin single-column {
   article.blog-post {
     grid-column-gap: unset;
     margin-bottom: 2em;
 
-    grid-template-columns: revert;
     grid-template-rows: unset;
     grid-template-columns: 1fr [full-start] 1em [left-gutter-start wide-header-start wide-start title-start left-gutter-end header-start content-start] calc(min(65ch, calc(100% - 2em))) [title-end content-end right-gutter-start wide-end wide-header-end header-end right-gutter-end] 1em [full-end] 1fr;
 
@@ -373,5 +372,29 @@ article.blog-post {
       border-top: 1px solid grey;
       padding-top: 0.5em;
     }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  @include single-column;
+}
+
+@media print {
+  @include single-column;
+
+  article.blog-post {
+    nav {
+      display: none;
+    }
+  }
+
+  figure.meme {
+    .top, .bottom {
+      /* For some unknown reason, we can't have white text here. */
+      color: yellow;
+    }
+  }
+  a.zola-anchor {
+    display: none;
   }
 }
