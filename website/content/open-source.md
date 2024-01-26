@@ -4,6 +4,7 @@ description = "Public projects deemed worth sharing. You might learn something."
 weight = 3
 [extra]
 hide_toc = "true"
+hide_read_more = "true"
 +++
 
 ## Tooling and recurring configuration
