@@ -105,7 +105,7 @@
     {% endif %}
     <aside class="side-panel">
       <div>
-        {% if page.toc and (page.extra.hide_toc is not defined) %}
+        {% if page.toc and page.extra.hide_toc is not defined %}
           <div class="block toc">
             <h3>Table of content</h3>
             <ul>
@@ -161,46 +161,52 @@
         <a href="https://www.funkythunks.dev/work-with-me" target="_blank">Wanna work with me?</a>
       </p>
     </div>
-    {% if page.lower or page.higher %}
-      <div class="read-more">
-        <h3>Read more</h3>
-        {% if page.lower %}
-          <div class="next">
-            <svg class=icon version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               width="400.004px" height="400.004px" viewBox="0 0 400.004 400.004"
-               xml:space="preserve">
-              <g>
-                <path d="M382.688,182.686H59.116l77.209-77.214c6.764-6.76,6.764-17.726,0-24.485c-6.764-6.764-17.73-6.764-24.484,0L5.073,187.757
-                  c-6.764,6.76-6.764,17.727,0,24.485l106.768,106.775c3.381,3.383,7.812,5.072,12.242,5.072c4.43,0,8.861-1.689,12.242-5.072
-                  c6.764-6.76,6.764-17.726,0-24.484l-77.209-77.218h323.572c9.562,0,17.316-7.753,17.316-17.315
-                  C400.004,190.438,392.251,182.686,382.688,182.686z"/>
-              </g>
-            </svg>
-            <div>
-              <a href="{{page.lower.path}}">{{ page.lower.title }}</a>
-              <span>{{ page.lower.description }}</span>
+    {% if page.extra.hide_read_more is not defined %}
+      {% if page.lower or page.higher %}
+        <div class="read-more">
+          <h3>Read more</h3>
+          {% if page.higher %}
+            <div class="previous">
+              <a href="{{page.higher.path}}">
+                <svg class=icon version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                   width="400.004px" height="400.004px" viewBox="0 0 400.004 400.004"
+                   xml:space="preserve">
+                  <g>
+                    <path d="M382.688,182.686H59.116l77.209-77.214c6.764-6.76,6.764-17.726,0-24.485c-6.764-6.764-17.73-6.764-24.484,0L5.073,187.757
+                      c-6.764,6.76-6.764,17.727,0,24.485l106.768,106.775c3.381,3.383,7.812,5.072,12.242,5.072c4.43,0,8.861-1.689,12.242-5.072
+                      c6.764-6.76,6.764-17.726,0-24.484l-77.209-77.218h323.572c9.562,0,17.316-7.753,17.316-17.315
+                      C400.004,190.438,392.251,182.686,382.688,182.686z"/>
+                  </g>
+                </svg>
+              </a>
+              <div>
+                <a href="{{page.higher.path}}">{{ page.higher.title }}</a>
+                <span>{{ page.higher.description }}</span>
+              </div>
             </div>
-          </div>
-        {% endif %}
-        {% if page.higher %}
-          <div class="previous">
-            <svg class=icon version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               width="400.004px" height="400.004px" viewBox="0 0 400.004 400.004"
-               xml:space="preserve">
-              <g>
-                <path d="M382.688,182.686H59.116l77.209-77.214c6.764-6.76,6.764-17.726,0-24.485c-6.764-6.764-17.73-6.764-24.484,0L5.073,187.757
-                  c-6.764,6.76-6.764,17.727,0,24.485l106.768,106.775c3.381,3.383,7.812,5.072,12.242,5.072c4.43,0,8.861-1.689,12.242-5.072
-                  c6.764-6.76,6.764-17.726,0-24.484l-77.209-77.218h323.572c9.562,0,17.316-7.753,17.316-17.315
-                  C400.004,190.438,392.251,182.686,382.688,182.686z"/>
-              </g>
-            </svg>
-            <div>
-              <a href="{{page.higher.path}}">{{ page.higher.title }}</a>
-              <span>{{ page.higher.description }}</span>
+          {% endif %}
+          {% if page.lower %}
+            <div class="next">
+              <a href="{{page.lower.path}}">
+                <svg class=icon version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                   width="400.004px" height="400.004px" viewBox="0 0 400.004 400.004"
+                   xml:space="preserve">
+                  <g>
+                    <path d="M382.688,182.686H59.116l77.209-77.214c6.764-6.76,6.764-17.726,0-24.485c-6.764-6.764-17.73-6.764-24.484,0L5.073,187.757
+                      c-6.764,6.76-6.764,17.727,0,24.485l106.768,106.775c3.381,3.383,7.812,5.072,12.242,5.072c4.43,0,8.861-1.689,12.242-5.072
+                      c6.764-6.76,6.764-17.726,0-24.484l-77.209-77.218h323.572c9.562,0,17.316-7.753,17.316-17.315
+                      C400.004,190.438,392.251,182.686,382.688,182.686z"/>
+                  </g>
+                </svg>
+              </a>
+              <div>
+                <a href="{{page.lower.path}}">{{ page.lower.title }}</a>
+                <span>{{ page.lower.description }}</span>
+              </div>
             </div>
-          </div>
-        {% endif %}
-      </div>
+          {% endif %}
+        </div>
+      {% endif %}
     {% endif %}
   </article>
 {% endblock content %}
