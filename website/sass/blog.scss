@@ -260,9 +260,6 @@ article.blog-post {
       a {
         font-size: 12px;
         svg {
-          height: 16px;
-          width: 16px;
-          fill: #ccc;
           padding-top: 8px;
         }
       }
@@ -292,6 +289,12 @@ article.blog-post {
     width: 100%;
   }
 
+  svg.icon {
+    width: 16px;
+    height: 16px;
+    fill: white;
+  }
+
   nav {
     display: grid;
     grid-template-columns: subgrid;
@@ -304,9 +307,6 @@ article.blog-post {
     background: #131116;
 
     svg.icon {
-      width: 16px;
-      height: 16px;
-      fill: white;
       padding-top: 3px;
     }
 
@@ -345,6 +345,48 @@ article.blog-post {
     font-size: 12px;
     color: darkgray;
     margin-top: 6px;
+  }
+
+  .read-more {
+    .previous, .next {
+      display: grid;
+      grid-template-columns: [left-button-start] 16px [left-button-end content-start] 1fr [content-end right-button-start] 16px [right-button-end];
+      gap: 16px;
+
+      padding: 16px 20px;
+      margin-block: 8px;
+      >* { grid-row: 1; }
+
+      border: 1.5px solid #cccccc99;
+      border-radius: 8px;
+
+      &:hover {
+        border-color: darkgray;
+        background-color: #00000066;
+      }
+
+      svg {
+        padding-top: 3px;
+      }
+
+      div {
+        grid-column: content;
+        display: grid; gap: 8px;
+        > * {
+          display: block;
+        }
+        span {
+          color: darkgray;
+        }
+      }
+    }
+    .next svg {
+      grid-column: right-button;
+      transform: rotate(0.5turn);
+    }
+    .previous svg {
+      grid-column: left-button;
+    }
   }
 }
 
@@ -432,7 +474,8 @@ article.blog-post {
       color: yellow;
     }
   }
-  a.zola-anchor {
+
+  a.zola-anchor, div.read-more {
     display: none;
   }
 }
