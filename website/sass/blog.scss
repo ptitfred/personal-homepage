@@ -362,15 +362,8 @@ article.blog-post {
       gap: 16px;
       min-height: 100px;
 
-      padding: 20px 20px;
-      >* { grid-row: 1; }
-
-      border: 1.5px solid #cccccc99;
-      border-radius: 8px;
-
-      &:hover {
-        border-color: darkgray;
-        background-color: #00000066;
+      > * {
+        grid-row: 1;
       }
 
       svg {
@@ -396,11 +389,13 @@ article.blog-post {
     .previous {
       grid-column: 1;
     }
-    .next svg {
+    .next > a {
       grid-column: right-button;
+    }
+    .next svg {
       transform: rotate(0.5turn);
     }
-    .previous svg {
+    .previous > a {
       grid-column: left-button;
     }
   }
@@ -472,7 +467,9 @@ article.blog-post {
 
   article.blog-post .read-more {
     grid-template-columns: unset;
+    gap: 24px 16px;
     .next, .previous {
+      min-height: unset;
       grid-column: 1;
       grid-row: unset;
     }
