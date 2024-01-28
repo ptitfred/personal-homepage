@@ -31,6 +31,7 @@ haskell = "Haskell"
 video = "video"
 blog = "blog"
 nix = "Nix"
+rust = "Rust"
 
 [markdown]
 # Whether to do syntax highlighting
