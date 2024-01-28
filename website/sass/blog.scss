@@ -511,23 +511,19 @@ article.blog-post {
   @include single-column;
 
   article.blog-post {
-    nav {
+    nav, a.zola-anchor, div.read-more {
       display: none;
     }
-  }
 
-  figure.meme {
-    .top, .bottom {
-      /* For some unknown reason, we can't have white text here. */
-      color: yellow;
+    figure.meme {
+      .top, .bottom {
+        /* For some unknown reason, we can't have white text here. */
+        color: yellow;
+      }
     }
-  }
 
-  a.zola-anchor, div.read-more {
-    display: none;
-  }
-
-  .key-point {
-    padding-inline: 0;
+    .key-point {
+      padding-inline: 0;
+    }
   }
 }
