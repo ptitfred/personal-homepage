@@ -124,13 +124,14 @@ article.blog-post {
   }
 
   aside + h2,
+  aside + h3,
   aside + ul,
   aside + ol,
   aside + p {
     margin-top: 10px;
   }
 
-  h2 {
+  h2, h3 {
     text-decoration: underline #28455D;
     display: flex;
     flex-direction: row-reverse;
@@ -259,6 +260,10 @@ article.blog-post {
   ol, ul {
     padding-left: 1em;
     margin: 0;
+  }
+
+  li > ul {
+    padding-left: 0;
   }
 
   p + ol, p + ul {
@@ -471,7 +476,7 @@ article.blog-post {
       font-size: 20px;
     }
 
-    h2 {
+    h2, h3 {
       display: flex;
       gap: 1rem;
     }
