@@ -85,11 +85,13 @@ It took me all of 2023 to accept that.
 
 Around Christmas 2023, I was a bit bored and took some time to read [the Rust Programming Language book](https://doc.rust-lang.org/book/).
 
-I was aware of Rust since 2014 as [Tristram], a colleague of mine at [Capitaine Train], used it for a routing engine, and as [Clément], a as-of-then future colleague of mine, talked about it at ScalaIO 2015. And we had a optimization tool at [Fretlink] developed by [Axelle]. But I never did take the time to study it.
+I was aware of Rust since 2014 as [Tristram], a colleague of mine at [Capitaine Train], ~~used it for a routing engine~~ who was a strong advocate but had to use C++ at the time, and as [Clément], a as-of-then future colleague of mine, talked about it at ScalaIO 2015. And we had a optimization tool at [Fretlink] developed by [Axelle]. But I never did take the time to study it.
 
 [Tristram]: https://mamot.fr/@tristramg
 [Clément]: https://framapiaf.org/@clementd
 [Axelle]: https://www.linkedin.com/in/axelle-piot-a987a0b8/
+
+**Edit**: _Tristram [notified me](https://mamot.fr/@tristramg/111838910731745483) he did not use Rust for the routing engine and had to suffer using C++, Rust not being mature enough at the time._
 
 I took [some notes](https://pouet.chapril.org/@ptitfred/111691245597831310) of my first steps. Some takeaways:
 - the documentation is outstanding, notably the [getting started](https://doc.rust-lang.org/stable/book/),
