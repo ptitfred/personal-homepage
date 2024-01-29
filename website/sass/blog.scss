@@ -64,6 +64,30 @@ article.blog-post {
     }
   }
 
+  > .key-point {
+    grid-column: wide;
+    display: grid;
+    grid-template-columns: subgrid;
+    > * {
+      grid-column: content;
+    }
+
+    background: #FFD43Bcc;
+    &:hover {
+      background: #FFD43Bee;
+    }
+    * {
+      color: black;
+    }
+
+    margin-block: 1em;
+    padding-block: 1em;
+    border-radius: 5px;
+    > p {
+      margin-block: 5px;
+    }
+  }
+
   div.footer {
     display: none;
   }
@@ -100,15 +124,15 @@ article.blog-post {
   }
 
   aside + h2,
+  aside + h3,
   aside + ul,
   aside + ol,
   aside + p {
     margin-top: 10px;
   }
 
-  h2 {
+  h2, h3 {
     text-decoration: underline #28455D;
-    grid-column: content;
     display: flex;
     flex-direction: row-reverse;
     justify-content: left;
@@ -238,6 +262,10 @@ article.blog-post {
     margin: 0;
   }
 
+  li > ul {
+    padding-left: 0;
+  }
+
   p + ol, p + ul {
     margin-top: -0.4em;
     margin-bottom: 0.4em;
@@ -362,15 +390,8 @@ article.blog-post {
       gap: 16px;
       min-height: 100px;
 
-      padding: 20px 20px;
-      >* { grid-row: 1; }
-
-      border: 1.5px solid #cccccc99;
-      border-radius: 8px;
-
-      &:hover {
-        border-color: darkgray;
-        background-color: #00000066;
+      > * {
+        grid-row: 1;
       }
 
       svg {
@@ -396,11 +417,13 @@ article.blog-post {
     .previous {
       grid-column: 1;
     }
-    .next svg {
+    .next > a {
       grid-column: right-button;
+    }
+    .next svg {
       transform: rotate(0.5turn);
     }
-    .previous svg {
+    .previous > a {
       grid-column: left-button;
     }
   }
@@ -453,7 +476,7 @@ article.blog-post {
       font-size: 20px;
     }
 
-    h2 {
+    h2, h3 {
       display: flex;
       gap: 1rem;
     }
@@ -472,10 +495,16 @@ article.blog-post {
 
   article.blog-post .read-more {
     grid-template-columns: unset;
+    gap: 24px 16px;
     .next, .previous {
+      min-height: unset;
       grid-column: 1;
       grid-row: unset;
     }
+  }
+
+  .key-point {
+    padding: 0.5em 1.2em;
   }
 }
 
@@ -487,19 +516,19 @@ article.blog-post {
   @include single-column;
 
   article.blog-post {
-    nav {
+    nav, a.zola-anchor, div.read-more {
       display: none;
     }
-  }
 
-  figure.meme {
-    .top, .bottom {
-      /* For some unknown reason, we can't have white text here. */
-      color: yellow;
+    figure.meme {
+      .top, .bottom {
+        /* For some unknown reason, we can't have white text here. */
+        color: yellow;
+      }
     }
-  }
 
-  a.zola-anchor, div.read-more {
-    display: none;
+    .key-point {
+      padding-inline: 0;
+    }
   }
 }
