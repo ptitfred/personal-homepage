@@ -93,7 +93,7 @@ I was aware of Rust since 2014 as [Tristram], a colleague of mine at [Capitaine 
 
 I took [some notes](https://pouet.chapril.org/@ptitfred/111691245597831310) of my first steps. Some takeaways:
 - the documentation is outstanding, notably the [getting started](https://doc.rust-lang.org/stable/book/),
-- rust-analyzer (Language Server Protocol) is really capable, which is sweat,
+- rust-analyzer (Language Server Protocol) is really capable, which is sweet,
 - rustc is by itself a very strong tool and helping beginners (like I was),
 - cargo is fast and capable (coming from the Haskell ecosystem, but even so comparing to npm).
 
