@@ -145,7 +145,7 @@ Well, not really I guess. I will miss servant for instance, and Purescript for t
 
 If I was given the opportunity to use it again I will for sure.
 
-{{ banner(src="./haskellers-for-hire.jpg", alt="Photo of myself with a t-shirt saying: 'haskellers for hire!'") }}
+{{ banner(src="./haskellers-for-hire.jpg", alt="Photo of myself with a t-shirt saying: 'haskellers for hire!'", variant="bright") }}
 
 I'm still an Haskeller for hire :heart:,
 
