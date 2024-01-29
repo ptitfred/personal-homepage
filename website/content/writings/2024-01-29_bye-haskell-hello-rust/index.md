@@ -150,3 +150,7 @@ If I was given the opportunity to use it again I will for sure.
 I'm still an Haskeller for hire :heart:,
 
 Frédéric
+
+_Thanks to [PicNoir] and [Tristram] for their reviews._
+
+[PicNoir]: https://social.alternativebit.fr/users/picnoir
