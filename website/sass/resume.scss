@@ -5,7 +5,8 @@
 body {
   background-color: white;
   max-width: 600px;
-  padding: 54pt 90pt 54pt 90pt;
+  padding-block: 54pt;
+  padding-inline: clamp(10pt, 10vw, 90pt);
 }
 
 ul.tasks {
