@@ -49,8 +49,9 @@ render_emoji = true
 
 [link_checker]
 skip_prefixes = [
-  # This anchor isn't present in the HTML (and therefore the linter complains) but it's a valid URL and it's interpreted by github.com to highlight the selected lines range.
+  # Those anchors aren't present in the HTML (and therefore the linter complains) but it's a valid URL and it's interpreted by github's javascript
   "https://github.com/funky-thunks/purescript-mantine/commit/9ba12f79aff53ff36bf10be7e98e9350ba5aa3bc#diff-945c6508eb5695eb9ce50c47df90e2479cf0c9c20c8ae4d6962ea098d8e0a97aR65-R98",
+  "https://github.com/ptitfred/posix-toolbox?tab=readme-ov-file",
 ]
 
 [extra]
