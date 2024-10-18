@@ -5,10 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     gitignore.url = "github:hercules-ci/gitignore.nix";
     gitignore.inputs.nixpkgs.follows = "nixpkgs";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
     posix-toolbox.url = "github:ptitfred/posix-toolbox";
     easy-ps.url = "github:justinwoo/easy-purescript-nix";
   };
