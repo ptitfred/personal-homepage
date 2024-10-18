@@ -34,7 +34,7 @@
 
       overlays = [
         overlay
-        posix-toolbox.overlay
+        posix-toolbox.overlays.default
       ];
 
       tests =
