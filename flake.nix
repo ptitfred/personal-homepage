@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    previous.url = "github:nixos/nixpkgs/nixos-22.11";
     gitignore.url = "github:hercules-ci/gitignore.nix";
     gitignore.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat = {
@@ -14,12 +13,10 @@
     easy-ps.url = "github:justinwoo/easy-purescript-nix";
   };
 
-  outputs = { nixpkgs, previous, gitignore, posix-toolbox, easy-ps, ... }:
+  outputs = { nixpkgs, gitignore, posix-toolbox, easy-ps, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system overlays; };
-
-      previous-pkgs = import previous { inherit system; };
 
       inherit (gitignore.lib) gitignoreSource;
 
@@ -32,7 +29,6 @@
         };
 
       overlay = _: prev: {
-        nix-linter = previous-pkgs.nix-linter;
         easy-ps = easy-ps.packages.${system};
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
@@ -68,8 +64,6 @@
             };
         };
 
-      lint = pkgs.callPackage ./lint.nix {};
-
       mkCheck = name: checkPhase:
         pkgs.stdenvNoCC.mkDerivation {
           inherit name checkPhase;
@@ -80,6 +74,14 @@
             mkdir "$out"
           '';
         };
+
+      linter = pkgs.posix-toolbox.nix-linter.override {
+        excludedPaths = [
+          "scripting/spago-packages.nix"
+          "scripting/.spago/*"
+          "nix/*"
+        ];
+      };
 
     in
       {
@@ -112,14 +114,14 @@
 
           lint = {
             type = "app";
-            program = "${lint}/bin/lint";
+            program = "${linter}/bin/nix-linter";
           };
         };
 
         checks.${system} = {
           lint =
             mkCheck "lint-nix" ''
-              ${lint}/bin/lint
+              ${linter}/bin/nix-linter ${./.}
             '';
         };
 
