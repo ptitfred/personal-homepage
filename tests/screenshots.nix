@@ -1,5 +1,5 @@
 { writeShellApplication
-, python38
+, python39
 , posix-toolbox
 , ptitfred
 , port
@@ -9,7 +9,7 @@
 
 writeShellApplication {
   name = "tests";
-  runtimeInputs = [ python38 posix-toolbox.wait-tcp ptitfred.take-screenshots ];
+  runtimeInputs = [ python39 posix-toolbox.wait-tcp ptitfred.take-screenshots ];
   text = ''
     set -e
 

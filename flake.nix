@@ -2,7 +2,7 @@
   description = "Personal homepage (frederic.menou.me)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     gitignore.url = "github:hercules-ci/gitignore.nix";
     gitignore.inputs.nixpkgs.follows = "nixpkgs";
     posix-toolbox.url = "github:ptitfred/posix-toolbox";
