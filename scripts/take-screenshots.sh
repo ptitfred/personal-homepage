@@ -1,5 +1,7 @@
 set -e
 
+puppeteer --version
+
 baseUrl="$1"
 output="$2"
 
@@ -22,9 +24,9 @@ function takeScreenshot {
     then
       echo "$output/$hash.png already present, skipping"
     else
-      puppeteer screenshot --viewport 1200x630 "$url" "$output/$hash-uncropped.png"
+      puppeteer screenshot --timeout 5000 --viewport 1200x630 "$url" "$output/$hash-uncropped.png"
       echo "Cropping to $output/$hash.png"
-      convert "$output/$hash-uncropped.png" -crop 1200x630+0+0 "$output/$hash.png"
+      magick "$output/$hash-uncropped.png" -crop 1200x630+0+0 "$output/$hash.png"
       rm "$output/$hash-uncropped.png"
     fi
   fi

@@ -24,12 +24,13 @@
           paths = [ scripting (website baseUrl) ];
         };
 
-      overlay = _: prev: {
+      overlay = final: prev: {
         easy-ps = easy-ps.packages.${system};
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
-          take-screenshots = prev.callPackage scripts/take-screenshots.nix {};
+          take-screenshots = final.callPackage scripts/take-screenshots.nix {};
         };
+        puppeteer-cli = final.callPackage pkgs/puppeteer-cli {};
       };
 
       overlays = [
@@ -56,7 +57,6 @@
             pkgs.callPackage tests/in-nginx.nix {
               cores = 2;
               memorySize = 4096;
-              testing-python = pkgs.callPackage "${nixpkgs}/nixos/lib/testing-python.nix" {};
             };
         };
 
