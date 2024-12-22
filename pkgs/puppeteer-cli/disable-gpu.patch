@@ -1,0 +1,11 @@
+--- a/index.js
++++ b/index.js
+@@ -256,6 +256,8 @@
+         args.push('--no-sandbox', '--disable-setuid-sandbox');
+     }
+ 
++    args.push('--disable-gpu');
++
+     return {
+         args
+     };
