@@ -24,23 +24,19 @@
           paths = [ scripting (website baseUrl) ];
         };
 
-      overlay = _: prev: {
+      overlay = final: prev: {
         easy-ps = easy-ps.packages.${system};
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
-          take-screenshots = prev.callPackage scripts/take-screenshots.nix {};
+          take-screenshots = final.callPackage scripts/take-screenshots.nix {};
         };
+        puppeteer-cli = final.callPackage pkgs/puppeteer-cli {};
       };
 
       overlays = [
-        patch-puppeteer
         overlay
         posix-toolbox.overlays.default
       ];
-
-      patch-puppeteer = final: _: {
-        puppeteer-cli = final.callPackage pkgs/puppeteer-cli {};
-      };
 
       tests =
         {
