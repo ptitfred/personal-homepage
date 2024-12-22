@@ -33,9 +33,14 @@
       };
 
       overlays = [
+        patch-puppeteer
         overlay
         posix-toolbox.overlays.default
       ];
+
+      patch-puppeteer = final: _: {
+        puppeteer-cli = final.callPackage pkgs/puppeteer-cli {};
+      };
 
       tests =
         {
@@ -56,7 +61,6 @@
             pkgs.callPackage tests/in-nginx.nix {
               cores = 2;
               memorySize = 4096;
-              testing-python = pkgs.callPackage "${nixpkgs}/nixos/lib/testing-python.nix" {};
             };
         };
 

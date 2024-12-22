@@ -2,12 +2,12 @@
 , ptitfred
 , cores
 , memorySize
-, testing-python
+, nixosTest
 }:
 
 let nginx = ptitfred.nginx.override { baseUrl = "http://localhost"; };
 in
-  testing-python.makeTest {
+  nixosTest {
     name = "personal-homepage-hosting";
     nodes.machine = { ... }: {
       virtualisation = {
