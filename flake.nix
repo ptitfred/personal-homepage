@@ -28,7 +28,7 @@
         easy-ps = easy-ps.packages.${system};
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
-          take-screenshots = final.callPackage scripts/take-screenshots.nix {};
+          take-screenshots = final.callPackage pkgs/take-screenshots {};
         };
         puppeteer-cli = final.callPackage pkgs/puppeteer-cli {};
       };
