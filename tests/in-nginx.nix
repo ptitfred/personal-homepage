@@ -17,7 +17,14 @@ nixosTest {
 
     services.ptitfred.personal-homepage = {
       enable = true;
-      domain = "localhost";
+      domain = "long.test.localhost";
+      aliases = [ "test.localhost" ];
+      redirections = [
+        { path = "/example";  target = "http://long.test.localhost/open-source"; }
+        { path = "/example/"; target = "http://long.test.localhost/open-source"; }
+      ];
+
+      # Explicitly disable HTTPs as we can't have the ACME dance in the VM
       secure = false;
     };
 
