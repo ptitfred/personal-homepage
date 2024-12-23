@@ -1,35 +1,37 @@
 { httpie
-, ptitfred
 , cores
 , memorySize
 , nixosTest
+, nixosModule
+, ptitfred
 }:
 
-let nginx = ptitfred.nginx.override { baseUrl = "http://localhost"; };
-in
-  nixosTest {
-    name = "personal-homepage-hosting";
-    nodes.machine = { ... }: {
-      virtualisation = {
-        inherit cores memorySize;
-      };
+nixosTest {
+  name = "personal-homepage-hosting";
+  nodes.machine = { ... }: {
+    imports = [ nixosModule ];
 
-      users.users.test_user = {
-        isNormalUser = true;
-        description = "Test User";
-        password = "foobar";
-        uid = 1000;
-      };
-
-      services.nginx.enable = true;
-      services.nginx.virtualHosts.local = {
-        locations."/" = {
-          inherit (nginx) root extraConfig;
-        };
-      };
-
-      environment.systemPackages = [ httpie ptitfred.take-screenshots ];
+    virtualisation = {
+      inherit cores memorySize;
     };
 
-    testScript = builtins.readFile ./integration-test.py;
-  }
+    services.ptitfred.personal-homepage = {
+      enable = true;
+      domain = "localhost";
+      secure = false;
+    };
+
+    users.users.test_user = {
+      isNormalUser = true;
+      description = "Test User";
+      password = "foobar";
+      uid = 1000;
+    };
+
+    services.nginx.enable = true;
+
+    environment.systemPackages = [ httpie ptitfred.check-screenshots ];
+  };
+
+  testScript = builtins.readFile ./integration-test.py;
+}

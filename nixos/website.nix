@@ -11,7 +11,7 @@ let
 
   nginx = pkgs.ptitfred.nginx.override { inherit baseUrl; };
 
-  baseUrl = "https://${cfg.domain}";
+  baseUrl = if cfg.secure then "https://${cfg.domain}" else "http://${cfg.domain}";
 
   assetsDirectory = "homepage-extra-assets";
   screenshotsSubdirectory = "og";

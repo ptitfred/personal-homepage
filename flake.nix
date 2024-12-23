@@ -28,7 +28,9 @@
         easy-ps = easy-ps.packages.${system};
         ptitfred = {
           nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
-          take-screenshots = final.callPackage pkgs/take-screenshots {};
+
+          check-screenshots = final.callPackage pkgs/check-screenshots {};
+          take-screenshots  = final.callPackage pkgs/take-screenshots  {};
         };
         puppeteer-cli = final.callPackage pkgs/puppeteer-cli {};
       };
@@ -57,6 +59,7 @@
             pkgs.callPackage tests/in-nginx.nix {
               cores = 2;
               memorySize = 4096;
+              inherit nixosModule;
             };
         };
 
@@ -79,12 +82,15 @@
         ];
       };
 
+      nixosModule = import ./nixos { inherit overlays; };
+
     in
       {
         overlays.default = overlay;
+        nixosModules.default = nixosModule;
 
         packages.${system} = {
-          inherit (pkgs.ptitfred) take-screenshots;
+          inherit (pkgs.ptitfred) take-screenshots check-screenshots;
           inherit scripting;
           nginx-root = pkgs.ptitfred.nginx.root;
           integration-tests = tests.in-nginx;
