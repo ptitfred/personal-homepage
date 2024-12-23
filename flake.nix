@@ -86,7 +86,6 @@
 
     in
       {
-        overlays.default = overlay;
         nixosModules.default = nixosModule;
 
         packages.${system} = {
