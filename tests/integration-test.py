@@ -2,17 +2,26 @@ machine.start()
 machine.wait_for_unit("nginx.service")
 
 with subtest("Base files present"):
-  machine.succeed("http http://localhost/index.html")
-  machine.succeed("http http://localhost/sitemap.xml")
-  machine.succeed("http http://localhost/robots.txt")
-  machine.succeed("http http://localhost/atom.xml")
+  machine.succeed("http --check-status http://long.test.localhost/index.html")
+  machine.succeed("http --check-status http://long.test.localhost/sitemap.xml")
+  machine.succeed("http --check-status http://long.test.localhost/robots.txt")
+  machine.succeed("http --check-status http://long.test.localhost/rss.xml")
+
+with subtest("Aliases"):
+  machine.succeed("http --check-status --follow http://test.localhost")
+  machine.succeed("http --check-status --follow http://test.localhost/index.html")
 
 with subtest("Legacy URLs still there (by redirections)"):
-  machine.succeed("http http://localhost/about.html")
-  machine.succeed("http http://localhost/resume.html")
-  machine.succeed("http http://localhost/blog")
-  machine.succeed("http http://localhost/tutorials")
+  machine.succeed("http --check-status --follow http://long.test.localhost/about.html")
+  machine.succeed("http --check-status --follow http://long.test.localhost/resume.html")
+  machine.succeed("http --check-status --follow http://long.test.localhost/blog")
+  machine.succeed("http --check-status --follow http://long.test.localhost/tutorials")
+
+with subtest("Custom redirections"):
+  machine.succeed("http --check-status --follow http://long.test.localhost/example")
+  machine.succeed("http --check-status --follow http://long.test.localhost/example/")
 
 with subtest("Screenshots"):
-  machine.succeed("su - test_user -c \"mkdir -p screenshots\"")
-  machine.succeed("su - test_user -c \"take-screenshots http://localhost/ screenshots\"")
+  machine.succeed("systemctl cat homepage-screenshots.service")
+  machine.succeed("systemctl start homepage-screenshots.service")
+  machine.succeed("check-screenshots http://long.test.localhost")

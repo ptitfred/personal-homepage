@@ -33,7 +33,11 @@ function takeScreenshot {
 }
 
 function takeScreenshots {
-  while read -r url ; do takeScreenshot "$url" ; done
+  readarray -t urls
+  for url in "${urls[@]}"
+  do
+    takeScreenshot "$url"
+  done
 }
 
 function proceed {
