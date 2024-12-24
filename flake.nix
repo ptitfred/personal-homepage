@@ -14,31 +14,16 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system overlays; };
 
-      inherit (gitignore.lib) gitignoreSource;
-
-      scripting = pkgs.callPackage scripting/package.nix { inherit gitignoreSource; };
-      website = baseUrl: pkgs.callPackage website/package.nix { inherit baseUrl gitignoreSource; };
-      root = baseUrl:
-        pkgs.symlinkJoin {
-          name = "personal-homepage";
-          paths = [ scripting (website baseUrl) ];
-        };
-
-      overlay = final: prev: {
-        easy-ps = easy-ps.packages.${system};
-        ptitfred = {
-          nginx = prev.lib.makeOverridable ({ baseUrl ? "http://localhost" }: prev.callPackage webservers/nginx/package.nix { root = root baseUrl; }) {};
-
-          check-screenshots = final.callPackage pkgs/check-screenshots {};
-          take-screenshots  = final.callPackage pkgs/take-screenshots  {};
-        };
-        puppeteer-cli = final.callPackage pkgs/puppeteer-cli {};
-      };
+      overlay = import pkgs/overlay.nix;
 
       overlays = [
-        overlay
+        gitignore.overlay
         posix-toolbox.overlays.default
+        (_: _: { easy-ps = easy-ps.packages.${system}; })
+        overlay
       ];
+
+      website = baseUrl: pkgs.ptitfred.website.static.override { inherit baseUrl; };
 
       tests =
         {
@@ -90,8 +75,6 @@
 
         packages.${system} = {
           inherit (pkgs.ptitfred) take-screenshots check-screenshots;
-          inherit scripting;
-          nginx-root = pkgs.ptitfred.nginx.root;
           integration-tests = tests.in-nginx;
         };
 
