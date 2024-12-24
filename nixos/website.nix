@@ -9,7 +9,7 @@ let
 
   brotlify = pkgs.callPackage ./brotlify.nix { };
 
-  nginx = pkgs.ptitfred.nginx.override { inherit baseUrl; };
+  nginx = pkgs.ptitfred.website.nginx.override { inherit baseUrl; };
 
   baseUrl = if cfg.secure then "https://${cfg.domain}" else "http://${cfg.domain}";
 
