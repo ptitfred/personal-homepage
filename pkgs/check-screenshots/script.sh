@@ -11,14 +11,18 @@ function readPath {
   curl -s "$url" | htmlq 'meta[property="og:image"]' --attribute content
 }
 
+function clearLine {
+  echo -en "\r\033[K"
+}
+
 function checkScreenshot {
   echo -n "$1 "
   path=$(readPath "$1")
   if [ -n "$path" ]
   then
-    http --quiet --check-status --headers GET "${baseUrl}${path}" && echo OK
+    http --quiet --check-status --headers GET "${baseUrl}${path}" && echo "✅"
   else
-    echo Skipped
+    clearLine
   fi
 }
 

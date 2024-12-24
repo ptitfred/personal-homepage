@@ -12,3 +12,6 @@ tests:
 
 integration-tests:
 	nix build --print-build-logs .#integration-tests
+
+check-metas:
+	nix run .#check-screenshots https://frederic.menou.me
