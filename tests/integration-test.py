@@ -1,6 +1,9 @@
 machine.start()
 machine.wait_for_unit("nginx.service")
 
+with subtest("Check root setup before deployment"):
+  machine.succeed("ls -l /var/lib/www/personal-homepage")
+
 with subtest("Base files present"):
   machine.succeed("http --check-status http://long.test.localhost/index.html")
   machine.succeed("http --check-status http://long.test.localhost/sitemap.xml")

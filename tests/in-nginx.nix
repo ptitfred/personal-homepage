@@ -13,6 +13,7 @@ nixosTest {
 
     virtualisation = {
       inherit cores memorySize;
+      writableStore = true;
     };
 
     services.ptitfred.personal-homepage = {
@@ -38,6 +39,9 @@ nixosTest {
     services.nginx.enable = true;
 
     environment.systemPackages = [ httpie ptitfred.check-screenshots ];
+
+    # disable the timers in the VM
+    systemd.timers.homepage-deployment.enable = false;
   };
 
   testScript = builtins.readFile ./integration-test.py;

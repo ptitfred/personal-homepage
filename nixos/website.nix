@@ -7,7 +7,25 @@ let
 
   enabled = cfg.enable && config.services.nginx.enable;
 
-  nginx = pkgs.ptitfred.website.nginx.override { inherit baseUrl; };
+  websitesDirectory = "www";
+  linkPath = "/var/lib/${websitesDirectory}/personal-homepage";
+
+  nginx =
+    pkgs.ptitfred.website.nginx.override {
+      inherit baseUrl;
+    };
+
+  deploy-from-flake =
+    pkgs.ptitfred.deploy-from-flake.deployment.override {
+      inherit baseUrl linkPath;
+      inherit (cfg) flakeInput;
+    };
+
+  activation-script =
+    pkgs.ptitfred.deploy-from-flake.activation-script.override {
+      inherit (nginx) root;
+      inherit linkPath;
+    };
 
   baseUrl = if cfg.secure then "https://${cfg.domain}" else "http://${cfg.domain}";
 
@@ -47,7 +65,7 @@ let
         enableACME = lib.mkIf cfg.secure true;
 
         locations."/" = {
-          inherit (nginx) root;
+          root = linkPath;
           inherit extraConfig;
         };
 
@@ -123,6 +141,14 @@ in
         '';
         default = true;
       };
+
+      flakeInput = mkOption {
+        type = types.str;
+        default = "github:ptitfred/personal-homepage";
+        description = ''
+          Flake from which to regularly deploy. Default value should be fine. Configure it if you want to hack around.
+        '';
+      };
     };
 
     config = mkIf enabled {
@@ -136,9 +162,9 @@ in
       systemd.services.homepage-screenshots = {
         description = "Utility to take screenshots.";
 
-        after    = [ "nginx.service" ];
-        requires = [ "nginx.service" ];
-        partOf = [ "default.target" ];
+        after    = [ "nginx.service"  ];
+        requires = [ "nginx.service"  ];
+        partOf   = [ "default.target" ];
 
         script = ''
           mkdir -p /var/lib/${assetsDirectory}/${screenshotsSubdirectory}
@@ -165,8 +191,43 @@ in
         wantedBy = [ "timers.target" ];
       };
 
+      systemd.services.homepage-deployment = {
+        description = "Utility to install the web pages to a Nix profile";
+
+        after    = [ "nginx.service"  ];
+        requires = [ "nginx.service"  ];
+        partOf   = [ "default.target" ];
+
+        script = "${deploy-from-flake}/bin/deploy-from-flake";
+
+        serviceConfig = {
+          StateDirectory = websitesDirectory;
+          StateDirectoryMode = "0750";
+          User = "nginx";
+          Group = "nginx";
+          Type = "oneshot";
+        };
+      };
+
+      systemd.timers.homepage-deployment = {
+        description = "Utility to install the web pages to a Nix profile";
+        timerConfig.OnCalendar = "*:*:00";
+        wantedBy = [ "timers.target" ];
+      };
+
       security.acme.certs.${cfg.domain} = lib.mkIf cfg.secure {
         extraDomainNames = lib.mkIf cfg.secure cfg.aliases;
       };
+
+      nix.settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+      };
+
+      system.activationScripts =
+        {
+          homepage-deployment = ''
+            ${activation-script}/bin/deploy-from-flake-activation-script
+          '';
+        };
     };
   }

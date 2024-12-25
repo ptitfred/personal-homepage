@@ -24,6 +24,7 @@
       ];
 
       website = baseUrl: pkgs.ptitfred.website.static.override { inherit baseUrl; };
+      website-full = baseUrl: (pkgs.ptitfred.website.nginx.override { inherit baseUrl; }).root;
 
       tests =
         {
@@ -72,6 +73,9 @@
     in
       {
         nixosModules.default = nixosModule;
+
+        # function used in the `deploy-from-flake`
+        website.default = website-full;
 
         packages.${system} = {
           inherit (pkgs.ptitfred) take-screenshots check-screenshots;
