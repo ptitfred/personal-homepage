@@ -7,8 +7,6 @@ let
 
   enabled = cfg.enable && config.services.nginx.enable;
 
-  brotlify = pkgs.callPackage ./brotlify.nix { };
-
   nginx = pkgs.ptitfred.website.nginx.override { inherit baseUrl; };
 
   baseUrl = if cfg.secure then "https://${cfg.domain}" else "http://${cfg.domain}";
@@ -33,11 +31,13 @@ let
     "${alias}" = vhostRedirectionBaseDefinition // vhostRedirectionOptionalDefinition;
   };
 
+  mkRedirections = lib.strings.concatMapStringsSep "\n" mkRedirection;
+
   mkRedirection = { path, target }: "rewrite ^${path}$ ${target} permanent;";
 
   extraConfig = ''
     ${nginx.extraConfig}
-    ${lib.strings.concatMapStringsSep "\n" mkRedirection cfg.redirections}
+    ${mkRedirections cfg.redirections}
   '';
 
   hostingHost =
@@ -47,7 +47,7 @@ let
         enableACME = lib.mkIf cfg.secure true;
 
         locations."/" = {
-          root = brotlify { src = nginx.root; };
+          inherit (nginx) root;
           inherit extraConfig;
         };
 

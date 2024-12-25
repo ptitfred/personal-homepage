@@ -1,4 +1,4 @@
-{ callPackage, lib, symlinkJoin }:
+{ callPackage, lib, ptitfred, symlinkJoin }:
 
 let scripting = callPackage ../../scripting/package.nix {};
     static = { baseUrl }: callPackage ../../website/package.nix { inherit baseUrl; };
@@ -7,9 +7,12 @@ let scripting = callPackage ../../scripting/package.nix {};
       {
         extraConfig = builtins.readFile ./nginx.conf;
         root =
-          symlinkJoin {
-            name = "personal-homepage";
-            paths = [ scripting (static extras) ];
+          ptitfred.lib.brotlify {
+            src =
+              symlinkJoin {
+                name = "personal-homepage";
+                paths = [ scripting (static extras) ];
+              };
           };
       };
 
