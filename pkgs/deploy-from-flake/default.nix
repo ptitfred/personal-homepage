@@ -8,7 +8,7 @@ let deployment =
       };
 
     defaults = {
-      linkPath = "/var/lib/web-profiles/personal-homepage";
+      linkPath = "/var/lib/www/personal-homepage";
     };
 
     deploymentDefaults = defaults // {
