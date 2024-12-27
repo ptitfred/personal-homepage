@@ -13,7 +13,6 @@ nixosTest {
 
     virtualisation = {
       inherit cores memorySize;
-      writableStore = true;
     };
 
     services.ptitfred.personal-homepage = {
