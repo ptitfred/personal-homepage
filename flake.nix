@@ -59,11 +59,7 @@
 
       nixosModule = import ./nixos { inherit overlays; };
 
-      zola = {
-        check      = pkgs.writeShellScript "zola-check"      "${pkgs.zola}/bin/zola --root $1 check";
-        dev-server = pkgs.writeShellScript "zola-dev-server" "${pkgs.zola}/bin/zola --root $1 serve --open";
-      };
-
+      inherit (pkgs.ptitfred) zola;
       inherit (pkgs.ptitfred.lib) mkApps mkChecks;
 
     in
@@ -90,6 +86,6 @@
           lint-nix = "${linter}/bin/nix-linter ${./.}";
         };
 
-        devShells.${system}.default = with pkgs; mkShell { buildInputs = [ zola ]; };
+        devShells.${system}.default = pkgs.mkShell { buildInputs = [ pkgs.zola ]; };
       };
 }
