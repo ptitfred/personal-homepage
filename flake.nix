@@ -23,44 +23,15 @@
         overlay
       ];
 
-      website = baseUrl: pkgs.ptitfred.website.static.override { inherit baseUrl; };
       website-full = baseUrl: (pkgs.ptitfred.website.nginx.override { inherit baseUrl; }).root;
 
-      tests =
-        {
-          screenshots =
-            pkgs.callPackage tests/screenshots.nix rec {
-              port = "8000";
-              testUrl = "http://localhost:${port}";
-              static = website testUrl;
-            };
-
-          local =
-            pkgs.callPackage tests/local.nix rec {
-              port = "8000";
-              static = website "http://localhost:${port}";
-            };
-
-          in-nginx =
-            pkgs.callPackage tests/in-nginx.nix {
-              cores = 2;
-              memorySize = 4096;
-              inherit nixosModule;
-            };
-        };
-
-      linter = pkgs.posix-toolbox.nix-linter.override {
-        excludedPaths = [
-          "scripting/spago-packages.nix"
-          "scripting/.spago/*"
-          "nix/*"
-        ];
-      };
+      tests = pkgs.callPackage ./tests { inherit nixosModule; };
 
       nixosModule = import ./nixos { inherit overlays; };
 
       inherit (pkgs.ptitfred) zola;
       inherit (pkgs.ptitfred.lib) mkApps mkChecks;
+      inherit (pkgs.posix-toolbox) nix-linter;
 
     in
       {
@@ -77,15 +48,14 @@
         apps.${system} = mkApps {
           check-links = "${zola.check}";
           dev-server  = "${zola.dev-server}";
-          lint        = "${linter}/bin/nix-linter";
-          local       = "${tests.local}/bin/local";
-          tests       = "${tests.screenshots}/bin/tests";
+          lint        = "${nix-linter}/bin/nix-linter";
+          tests       = "${tests.screenshots}/bin/test-screenshots";
         };
 
         checks.${system} = mkChecks {
-          lint-nix = "${linter}/bin/nix-linter ${./.}";
+          lint-nix = "${nix-linter}/bin/nix-linter ${./.}";
         };
 
-        devShells.${system}.default = pkgs.mkShell { buildInputs = [ pkgs.zola ]; };
+        devShells.${system}.default = pkgs.callPackage ./shell.nix {};
       };
 }
