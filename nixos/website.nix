@@ -17,7 +17,7 @@ let
 
   deploy-from-flake =
     pkgs.ptitfred.deploy-from-flake.deployment.override {
-      inherit baseUrl linkPath;
+      inherit baseUrl linkPath screenshotsDirectory;
       inherit (cfg) flakeInput;
     };
 
@@ -31,6 +31,7 @@ let
 
   assetsDirectory = "homepage-extra-assets";
   screenshotsSubdirectory = "og";
+  screenshotsDirectory = "/var/lib/${assetsDirectory}/${screenshotsSubdirectory}";
 
   mkRedirect = alias: vhosts: vhosts // redirect alias;
 
@@ -167,8 +168,7 @@ in
         partOf   = [ "default.target" ];
 
         script = ''
-          mkdir -p /var/lib/${assetsDirectory}/${screenshotsSubdirectory}
-          ${pkgs.ptitfred.take-screenshots}/bin/take-screenshots ${baseUrl} /var/lib/${assetsDirectory}/${screenshotsSubdirectory}
+          ${pkgs.ptitfred.take-screenshots}/bin/take-screenshots ${baseUrl} "${screenshotsDirectory}"
         '';
 
         serviceConfig = {

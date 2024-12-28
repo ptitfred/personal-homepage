@@ -5,6 +5,8 @@ puppeteer --version
 baseUrl="$1"
 output="$2"
 
+mkdir -p "$output"
+
 function listPages {
   curl -s "$baseUrl/sitemap.xml" | htmlq -t urlset url loc
 }

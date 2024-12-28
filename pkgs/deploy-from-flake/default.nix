@@ -1,10 +1,10 @@
 { callPackage, lib }:
 
 let deployment =
-      { baseUrl, flakeInput, linkPath }:
+      { baseUrl, flakeInput, linkPath, screenshotsDirectory }:
 
       callPackage ./deployment.nix {
-        inherit baseUrl flakeInput linkPath;
+        inherit baseUrl flakeInput linkPath screenshotsDirectory;
       };
 
     defaults = {
@@ -14,6 +14,7 @@ let deployment =
     deploymentDefaults = defaults // {
       # To be changed in production absolutely
       baseUrl = null;
+      screenshotsDirectory = null;
 
       # Overridable if you want to test a branch
       flakeInput = "github:ptitfred/personal-homepage";
