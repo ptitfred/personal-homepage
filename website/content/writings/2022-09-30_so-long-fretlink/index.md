@@ -10,7 +10,7 @@ tags = ["career", "english"]
 
 {{ banner(alt="An empty truck viewed from the top, alonside a forklift.", src="so-long-trucks-banner.jpg") }}
 
-3 months ago was my last day at [Fretlink](https://www.linkedin.com/company/fretlink/).
+3 months ago was my last day at [Fretlink](https://www.fretlink.com/).
 
 Actually it was the last day for all of us as the company went down following the infamous [Liquidation Judiciaire](https://fr.wikipedia.org/wiki/Liquidation_judiciaire_en_droit_fran%C3%A7ais).
 

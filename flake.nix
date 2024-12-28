@@ -49,17 +49,6 @@
             };
         };
 
-      mkCheck = name: checkPhase:
-        pkgs.stdenvNoCC.mkDerivation {
-          inherit name checkPhase;
-          dontBuild = true;
-          src = ./.;
-          doCheck = true;
-          installPhase = ''
-            mkdir "$out"
-          '';
-        };
-
       linter = pkgs.posix-toolbox.nix-linter.override {
         excludedPaths = [
           "scripting/spago-packages.nix"
@@ -69,6 +58,9 @@
       };
 
       nixosModule = import ./nixos { inherit overlays; };
+
+      inherit (pkgs.ptitfred) zola;
+      inherit (pkgs.ptitfred.lib) mkApps mkChecks;
 
     in
       {
@@ -82,37 +74,18 @@
           integration-tests = tests.in-nginx;
         };
 
-        apps.${system} = {
-          tests = {
-            type = "app";
-            program = "${tests.screenshots}/bin/tests";
-          };
-
-          local = {
-            type = "app";
-            program = "${tests.local}/bin/local";
-          };
-
-          dev-server = {
-            type = "app";
-            program =
-              let script = pkgs.writeShellScriptBin "zola-dev-server" "${pkgs.zola}/bin/zola -r $1 serve";
-               in "${script}/bin/zola-dev-server";
-          };
-
-          lint = {
-            type = "app";
-            program = "${linter}/bin/nix-linter";
-          };
+        apps.${system} = mkApps {
+          check-links = "${zola.check}";
+          dev-server  = "${zola.dev-server}";
+          lint        = "${linter}/bin/nix-linter";
+          local       = "${tests.local}/bin/local";
+          tests       = "${tests.screenshots}/bin/tests";
         };
 
-        checks.${system} = {
-          lint =
-            mkCheck "lint-nix" ''
-              ${linter}/bin/nix-linter ${./.}
-            '';
+        checks.${system} = mkChecks {
+          lint-nix = "${linter}/bin/nix-linter ${./.}";
         };
 
-        devShells.${system}.default = with pkgs; mkShell { buildInputs = [ zola ]; };
+        devShells.${system}.default = pkgs.mkShell { buildInputs = [ pkgs.zola ]; };
       };
 }
