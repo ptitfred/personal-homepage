@@ -31,7 +31,7 @@ The short answer is: yes, haskell is blessed with very strong libraries for the 
 In 2016 I left Capitaine Train after the buyout by [Trainline] and I shortly thereafter joined [Fretlink]. The company was in its early stage with a MVP in [nodejs] and vanillajs and a huge roadmap before us. We started using Haskell for more services, notably a pricing service and a supplier directory. Both were present in the nodejs MVP but still very basic and lacking a large set of features.
 
 [Trainline]: https://fr.wikipedia.org/wiki/Trainline
-[Fretlink]: https://www.linkedin.com/company/fretlink/
+[Fretlink]: https://www.fretlink.com/
 [nodejs]: https://nodejs.org
 
 This first "professional" use of Haskell was a bit of challenge but went very well, thanks notably to two recruits in 2017. We were 3 haskell developers, and willing to extend on this.
@@ -89,7 +89,7 @@ I was aware of Rust since 2014 as [Tristram], a colleague of mine at [Capitaine 
 
 [Tristram]: https://mamot.fr/@tristramg
 [Clément]: https://blog.clement.delafargue.name/
-[Axelle]: https://www.linkedin.com/in/axelle-piot-a987a0b8/
+[Axelle]: https://axelle.me/
 
 **Edit**: _Tristram [notified me](https://mamot.fr/@tristramg/111838910731745483) he did not use Rust for the routing engine and had to suffer using C++, Rust not being mature enough at the time._
 

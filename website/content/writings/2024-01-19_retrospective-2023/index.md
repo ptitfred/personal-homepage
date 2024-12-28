@@ -126,7 +126,7 @@ But Makefiles are a bit rough on the edges, and using it this way is clearly a h
 
 I typically have the same tasks, in a file with an another but with a syntax so close (for trivial cases) that usually I just have to `git mv Makefile justfile`.
 
-Two quick nuggets: [passing arguments](https://just.systems/man/en/chapter_38.html) and [self documentation](https://just.systems/man/en/chapter_24.html). But there's more and should give it a try!
+Two quick nuggets: [passing arguments] and [self documentation]. But there's more and should give it a try!
 
 For example, [here](https://github.com/ptitfred/personal-homepage/blob/main/justfile) is the justfile for the source of this website:
 
@@ -145,6 +145,8 @@ tests:
 ```
 
 [Just]: https://just.systems/man/en/
+[passing arguments]: https://just.systems/man/en/recipe-parameters.html
+[self documentation]: https://just.systems/man/en/listing-available-recipes.html
 
 ## Hurl for API testing
 

@@ -8,7 +8,7 @@ sort_by = "weight"
 
 - Hands on CTO / Fullstack developer as a [freelance](https://www.funkythunks.dev) (since 2023)
 - CTO at [Software Club](https://www.softwareclub.io/) (2022&nbsp;&mdash;&nbsp;2023)
-- CTO and Software Architect at [Fretlink](https://www.linkedin.com/company/fretlink/) (2016&nbsp;&mdash;&nbsp;2022)
+- CTO and Software Architect at [Fretlink](https://www.fretlink.com) (2016&nbsp;&mdash;&nbsp;2022)
 - Developer and CTO at [Captain Train](https://fr.wikipedia.org/wiki/Trainline_(Europe)) (2012&nbsp;&mdash;&nbsp;2016)
 - Developer for various companies as a contractor (2007&nbsp;&mdash;&nbsp;2012)
 - <span data-comment="and I thought my jokes were bad">Joker since the '80s</span>
