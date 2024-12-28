@@ -1,4 +1,4 @@
-final: _:
+final: prev:
 
 {
   ptitfred = {
@@ -9,5 +9,12 @@ final: _:
     deploy-from-flake = final.callPackage ./deploy-from-flake {};
     zola              = final.callPackage ./zola              {};
   };
+
+  posix-toolbox = prev.posix-toolbox // {
+    nix-linter = prev.posix-toolbox.nix-linter.override {
+      excludedPaths = import ../.linter.nix;
+    };
+  };
+
   puppeteer-cli = final.callPackage ./puppeteer-cli {};
 }

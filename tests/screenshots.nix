@@ -2,13 +2,15 @@
 , python39
 , posix-toolbox
 , ptitfred
-, port
-, testUrl
-, static
 }:
 
+let static = ptitfred.website.static.override { baseUrl = testUrl; };
+    testUrl = "http://localhost:${port}";
+    port = "8000";
+in
+
 writeShellApplication {
-  name = "tests";
+  name = "test-screenshots";
   runtimeInputs = [ python39 posix-toolbox.wait-tcp ptitfred.take-screenshots ];
   text = ''
     set -e
