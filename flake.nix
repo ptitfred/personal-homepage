@@ -49,17 +49,6 @@
             };
         };
 
-      mkCheck = name: checkPhase:
-        pkgs.stdenvNoCC.mkDerivation {
-          inherit name checkPhase;
-          dontBuild = true;
-          src = ./.;
-          doCheck = true;
-          installPhase = ''
-            mkdir "$out"
-          '';
-        };
-
       linter = pkgs.posix-toolbox.nix-linter.override {
         excludedPaths = [
           "scripting/spago-packages.nix"
@@ -75,6 +64,8 @@
         dev-server = pkgs.writeShellScript "zola-dev-server" "${pkgs.zola}/bin/zola --root $1 serve --open";
       };
 
+      inherit (pkgs.ptitfred.lib) mkApps mkChecks;
+
     in
       {
         nixosModules.default = nixosModule;
@@ -87,38 +78,16 @@
           integration-tests = tests.in-nginx;
         };
 
-        apps.${system} = {
-          tests = {
-            type = "app";
-            program = "${tests.screenshots}/bin/tests";
-          };
-
-          local = {
-            type = "app";
-            program = "${tests.local}/bin/local";
-          };
-
-          check-links = {
-            type = "app";
-            program = "${zola.check}";
-          };
-
-          dev-server = {
-            type = "app";
-            program = "${zola.dev-server}";
-          };
-
-          lint = {
-            type = "app";
-            program = "${linter}/bin/nix-linter";
-          };
+        apps.${system} = mkApps {
+          check-links = "${zola.check}";
+          dev-server  = "${zola.dev-server}";
+          lint        = "${linter}/bin/nix-linter";
+          local       = "${tests.local}/bin/local";
+          tests       = "${tests.screenshots}/bin/tests";
         };
 
-        checks.${system} = {
-          lint =
-            mkCheck "lint-nix" ''
-              ${linter}/bin/nix-linter ${./.}
-            '';
+        checks.${system} = mkChecks {
+          lint-nix = "${linter}/bin/nix-linter ${./.}";
         };
 
         devShells.${system}.default = with pkgs; mkShell { buildInputs = [ zola ]; };

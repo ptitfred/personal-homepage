@@ -1,8 +1,24 @@
 final: _:
 
+let mkApps   = final.lib.attrsets.mapAttrs (_: program: { "type" = "app"; inherit program; });
+    mkChecks = final.lib.attrsets.mapAttrs mkCheck;
+    mkCheck = name: checkPhase:
+      final.stdenvNoCC.mkDerivation {
+        inherit name checkPhase;
+        dontBuild = true;
+        src = ./.;
+        doCheck = true;
+        installPhase = ''
+          mkdir "$out"
+        '';
+      };
+in
 {
   ptitfred = {
-    lib.brotlify      = final.callPackage ./brotlify          {};
+    lib = {
+      inherit mkApps mkChecks;
+      brotlify = final.callPackage ./brotlify {};
+    };
     website           = final.callPackage ./website           {};
     check-screenshots = final.callPackage ./check-screenshots {};
     take-screenshots  = final.callPackage ./take-screenshots  {};
