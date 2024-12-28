@@ -70,6 +70,11 @@
 
       nixosModule = import ./nixos { inherit overlays; };
 
+      zola = {
+        check      = pkgs.writeShellScript "zola-check"      "${pkgs.zola}/bin/zola --root $1 check";
+        dev-server = pkgs.writeShellScript "zola-dev-server" "${pkgs.zola}/bin/zola --root $1 serve --open";
+      };
+
     in
       {
         nixosModules.default = nixosModule;
@@ -93,11 +98,14 @@
             program = "${tests.local}/bin/local";
           };
 
+          check-links = {
+            type = "app";
+            program = "${zola.check}";
+          };
+
           dev-server = {
             type = "app";
-            program =
-              let script = pkgs.writeShellScriptBin "zola-dev-server" "${pkgs.zola}/bin/zola -r $1 serve";
-               in "${script}/bin/zola-dev-server";
+            program = "${zola.dev-server}";
           };
 
           lint = {
