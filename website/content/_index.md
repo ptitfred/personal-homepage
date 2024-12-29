@@ -6,6 +6,7 @@ sort_by = "weight"
 {% section() %}
 ## Short resume
 
+- Full stack developer at [transport.data.gouv.fr](https://transport.data.gouv.fr) (since 2024)
 - Hands on CTO / Fullstack developer as a [freelance](https://www.funkythunks.dev) (since 2023)
 - CTO at [Software Club](https://www.softwareclub.io/) (2022&nbsp;&mdash;&nbsp;2023)
 - CTO and Software Architect at [Fretlink](https://www.fretlink.com) (2016&nbsp;&mdash;&nbsp;2022)
