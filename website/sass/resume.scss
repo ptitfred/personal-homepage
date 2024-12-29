@@ -153,7 +153,29 @@ section.position {
   margin: 2cm;
 }
 
+header.print-helper {
+  a {
+    color: #eeee11;
+  }
+  border: 2px solid purple;
+  border-radius: 8px;
+  color: #f0f0ff;
+  background-color: purple;
+  font-size: 20px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
 @media print {
+  header.print-helper {
+    display: none;
+  }
+
   body {
     padding: 0;
     max-width: unset;
@@ -169,6 +191,10 @@ section.position {
 }
 
 @media screen and (max-width: 480px) {
+  header.print-helper {
+    flex-direction: column;
+    gap: 0;
+  }
   body {
     padding: 12px;
   }
