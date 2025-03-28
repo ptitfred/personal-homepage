@@ -10,11 +10,11 @@ tags = ["nix", "english"]
 +++
 
 {% announce() %}
-**As of 2024-01-23**
+**As of 2024-01-26**
 - I've migrated the hosting to a dedicated VPS at [Gandi](https://gandi.net) using NixOS and nginx.
 - This is now done with Flakes, I'll post a follow-up soon.
 
-This blog post should therefore be taken with a grain of salt.
+See [this follow-up commenting those changes](@/writings/2024-12-28_website-nixos-flakes/index.md).
 {% end %}
 
 ## Hosted on Clever-Cloud
@@ -185,8 +185,9 @@ Some comments in no specific order:
 
 ## Flakes
 
-I know, I know, this is the future. I'm not used to it (yet).
+~~I know, I know, this is the future. I'm not used to it (yet).~~
 
+Edit 2024-12-28: See [this follow-up](@/writings/2024-12-28_website-nixos-flakes/index.md).
 * * *
 
 Thanks to Céline, Ismaël, Clément and Björn for their reviews.
