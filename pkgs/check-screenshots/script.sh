@@ -64,6 +64,7 @@ list="./list"
 
 trap cleanup EXIT HUP
 
+# shellcheck disable=SC2329
 function cleanup {
   # shellcheck disable=SC2317
   rm "$list"

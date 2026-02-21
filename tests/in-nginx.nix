@@ -1,12 +1,12 @@
 { httpie
 , cores
 , memorySize
-, nixosTest
+, testers
 , nixosModule
 , ptitfred
 }:
 
-nixosTest {
+testers.nixosTest {
   name = "personal-homepage-hosting";
   nodes.machine = { ... }: {
     imports = [ nixosModule ];
